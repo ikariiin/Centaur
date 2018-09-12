@@ -1,0 +1,35 @@
+@font-face {
+  font-family: "Google Sans";
+  font-weight: 400;
+  src: url("../../Resources/Fonts/GoogleSans-Regular.ttf");
+}
+@font-face {
+  font-family: "Google Sans";
+  font-weight: 400;
+  font-style: italic;
+  src: url("../../Resources/Fonts/GoogleSans-Italic.ttf");
+}
+@font-face {
+  font-family: "Google Sans";
+  font-weight: 500;
+  src: url("../../Resources/Fonts/GoogleSans-Medium.ttf");
+}
+@font-face {
+  font-family: "Google Sans";
+  font-weight: 500;
+  font-style: italic;
+  src: url("../../Resources/Fonts/GoogleSans-MediumItalic.ttf");
+}
+@font-face {
+  font-family: "Google Sans";
+  font-weight: 700;
+  src: url("../../Resources/Fonts/GoogleSans-Bold.ttf");
+}
+@font-face {
+  font-family: "Google Sans";
+  font-weight: 700;
+  font-style: italic;
+  src: url("../../Resources/Fonts/GoogleSans-BoldItalic.ttf");
+}
+
+$defaultFont: "Google Sans", "Poppins", "Roboto", "Helvetica Nueu", "Quicksand", "Segoe UI", "Calibri", Arial, sans-serif;

@@ -1,0 +1,30 @@
+@import "PageTransitions";
+@import "Colors";
+@import "Typography";
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  font-family: $defaultFont;
+}
+
+.mount-point {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+
+  .content-space {
+    height: calc(100% - 56px);
+    position: relative;
+    background: $colorPrimaryDark;
+  }
+  .nav-space {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+}

@@ -1,0 +1,28 @@
+@import "Colors";
+
+.context-page {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: -100%;
+  background: white;
+
+  &.enter {
+    animation-fill-mode: forwards;
+    animation-name: context-page-enter;
+    animation-duration: 700ms;
+    animation-timing-function: ease;
+  }
+}
+
+@keyframes context-page-enter {
+  from {
+    right: -100%;
+    opacity: 0;
+  }
+  to {
+    right: 0;
+    opacity: 1;
+  }
+}

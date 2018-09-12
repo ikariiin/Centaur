@@ -1,0 +1,79 @@
+@import "Colors";
+
+.context-page.chat {
+  display: grid;
+  grid-template-columns: 2fr 8fr;
+
+  .chat-people-sidebar {
+    margin: 1.5rem 0 1.5rem 1.5rem;
+    // border: 1px solid rgba(0,0,0,.1);
+    border-radius: 7px;
+
+    .people-list {
+      border-radius: 7px;
+      height: 100%;
+
+      .person {
+        transition: 200ms background-color ease-in;
+        width: calc(100% - 2.4rem);
+        padding: 1rem 1.2rem;
+        display: flex;
+        cursor: pointer;
+        border-radius: 7px;
+
+        &:hover, &.active {
+          background: rgba(0,0,0,.08);
+        }
+
+        .person-avatar {
+          width: 45px;
+          height: 45px;
+        }
+
+        .details {
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          margin-left: 1rem;
+
+          .username {
+            font-size: 1.2rem;
+          }
+          .last-message {
+            margin-top: .25rem;
+            opacity: .85;
+            font-size: .85rem;
+          }
+        }
+      }
+    }
+  }
+
+  .chat-content {
+    margin: 1.5rem;
+    border-radius: 7px;
+    position: relative;
+
+    .no-active-chat-display {
+      display: flex;
+      padding-left: 2.5rem;
+      background: rgba(0,0,0,.045);
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      font-size: 3.5rem;
+      font-weight: 500;
+      color: rgba(0,0,0,.65);
+      border-radius: 7px;
+    }
+
+    .chat-header {
+      border-radius: 7px 7px 0 0;
+
+      .person-username {
+        color: #ffffff;
+        margin-left: 1rem;
+      }
+    }
+  }
+}

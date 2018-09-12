@@ -1,0 +1,57 @@
+{
+  "name": "centaur",
+  "version": "0.0.1-dev",
+  "description": "A chat app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --optimize-dedupe --optimize-minify",
+    "dev": "webpack-dev-server --content-base src --hot --inline --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SaitamaSama/Centaur.git"
+  },
+  "keywords": [
+    "chat"
+  ],
+  "author": "Saitama Sama",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SaitamaSama/Centaur/issues"
+  },
+  "homepage": "https://github.com/SaitamaSama/Centaur#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "css-loader": "^1.0.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.9.2",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
+    "webpack-cli": "^3.1.0",
+    "webpack": "^4.17.0",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "dependencies": {
+    "@material-ui/core": "^3.0.2",
+    "@material-ui/icons": "^3.0.1",
+    "express": "^4.16.3",
+    "express-ws": "^4.0.0",
+    "react": "^16.5.0",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-dom": "^16.5.0",
+    "react-router-dom": "^4.3.1",
+    "rxjs": "^6.3.2",
+    "undux": "^5.0.0-alpha.15",
+    "uuid": "^3.3.2"
+  }
+}
