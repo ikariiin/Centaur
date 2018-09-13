@@ -124,6 +124,7 @@
       &.open {
         height: auto;
         background: white;
+        z-index: 1000;
       }
     }
   }
