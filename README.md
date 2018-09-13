@@ -23,4 +23,4 @@ node ExpressHandler.js
 
 Here are some screenshots to get you started.
 
-![chat](https://i.imgur.com/CmCsigS.png)
+![chat](https://i.imgur.com/aNsTut1.png)
