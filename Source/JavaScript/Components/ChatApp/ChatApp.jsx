@@ -14,7 +14,7 @@ export default class ChatApp extends Component {
     return (
       <React.Fragment>
         <ChatPeopleSidebar websocket={this.props.websocket} onChange={this.setActiveChat} />
-        <ChatContent chatContext={this.state.activeChat} websocket={this.props.websocket} />
+        <ChatContent chatContext={this.state.activeChat} websocket={this.props.websocket} activeUsername={this.props.activeUsername} />
       </React.Fragment>
     )
   }

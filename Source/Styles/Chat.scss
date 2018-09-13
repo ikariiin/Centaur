@@ -53,6 +53,21 @@
     margin: 1.5rem;
     border-radius: 7px;
     position: relative;
+    background: rgba(0,0,0,.05);
+
+    .user-avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
+      background: #DDD;
+      color: #212121;
+      font-weight: 300;
+
+      height: 38px;
+      width: 38px;
+      border-radius: 50%;
+    }
 
     .no-active-chat-display {
       display: flex;

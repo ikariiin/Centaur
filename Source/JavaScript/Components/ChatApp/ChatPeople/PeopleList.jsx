@@ -16,7 +16,7 @@ export default class PeopleList extends Component {
     },
     people: [{
       username: 'Ikari',
-      lastMessage: 'Hey man, how are you doing!?'
+      lastMessage: 'Everybody else is shit!'
     }, {
       username: 'Saitama',
       lastMessage: 'You reckon you can finish it by saturday?'

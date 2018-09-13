@@ -5,6 +5,7 @@ import {NoActiveChat} from "./NoActiveChat";
 import {Subscriber} from "../../../Functional/Subscriber";
 import {SubscriptionsEnum} from "../../../Configuration/SubscriptionsEnum";
 import InputForm from "./Messaging/Input/InputForm";
+import Conversation from "./Messaging/Conversation";
 
 export default class ChatContent extends Component {
   static subs = [SubscriptionsEnum.conversation];
@@ -13,6 +14,22 @@ export default class ChatContent extends Component {
    * @type {Subscriber}
    */
   subscriber = null;
+
+  state = {
+    conversation: [{
+      sender: 'Kizuna',
+      content: 'Who is the best girl in Darker than Black?'
+    }, {
+      sender: 'Ikari',
+      content: 'Amber!'
+    }, {
+      sender: 'Ikari',
+      content: 'Who else would it have beein?'
+    }, {
+      sender: 'Ikari',
+      content: 'Everybody else is shit!'
+    }]
+  };
 
   onConversationEvent(data) {
     console.log(data);
@@ -45,11 +62,12 @@ export default class ChatContent extends Component {
 
   render() {
     return (
-      <Paper elevation={8} className="chat-content">
+      <Paper elevation={0} className="chat-content">
         {this.props.chatContext
           ? (
             <React.Fragment>
               <ChatHeader context={this.props.chatContext} />
+              <Conversation conversation={this.state.conversation} activeUsername={this.props.activeUsername} />
               <InputForm />
             </React.Fragment>
           )

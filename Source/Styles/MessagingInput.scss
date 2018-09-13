@@ -18,6 +18,18 @@
     display: flex;
     align-items: center;
     padding: 0 1rem;
+
+    .input-element {
+      border: none;
+      outline: none;
+      flex-grow: 1;
+      display: block;
+      line-height: 1.7;
+      color: rgba(0,0,0,.9);
+      font-family: inherit;
+      font-size: .95rem;
+      margin-left: .5rem;
+    }
   }
 
   .send-button {

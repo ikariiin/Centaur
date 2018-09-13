@@ -11,7 +11,8 @@ export default class AppMount extends Component {
   state = {
     // possible values are 'chat', 'profile', 'settings'
     context: 'chat',
-    appStarted: false
+    appStarted: false,
+    activeUsername: 'Kizuna'
   };
 
   static WS_URI = 'ws://localhost:3000/ws';
@@ -63,7 +64,7 @@ export default class AppMount extends Component {
           ? (
             <React.Fragment>
               <main className="content-space">
-                <ContextPageHandler context={this.state.context} websocket={this.webSocket} />
+                <ContextPageHandler context={this.state.context} websocket={this.webSocket} activeUsername={this.state.activeUsername} />
               </main>
               <footer className="nav-space">
                 <Navbar onChange={this.changeContext} />
