@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Avatar from "@material-ui/core/Avatar/Avatar";
 import {Subscriber} from "../../../Functional/Subscriber";
 import {SubscriptionsEnum} from "../../../Configuration/SubscriptionsEnum";
+import MoreVertIcon from '@material-ui/icons/MoreVertOutlined';
 
 export default class PeopleList extends Component {
   static subs = [
@@ -61,6 +62,7 @@ export default class PeopleList extends Component {
       <section className="people-list">
         {this.state.people.map((person, index) => (
           <div className={`person ${this.state.activeChatContext.username === person['username'] && 'active'}`} key={index} role="button" onClick={() => this.changeChatContext(person)}>
+            <MoreVertIcon className="action-trigger" />
             <Avatar className="person-avatar">
               {person.username[0].toUpperCase()}
             </Avatar>

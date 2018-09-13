@@ -7,6 +7,20 @@ with them instantly!
 
 Cool, right?
 
+How to start a development state:
+```
+# clone the repo
+
+cd Centaur
+npm install
+npm run dev
+
+# on another cmd / terminal process
+
+cd Source/Server/
+node ExpressHandler.js
+```
+
 Here are some screenshots to get you started.
 
 ![chat](https://i.imgur.com/CmCsigS.png)

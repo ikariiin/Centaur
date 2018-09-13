@@ -1,5 +1,9 @@
 .conversation {
   width: 100%;
+  flex-grow: 1;
+  height: 90%;
+
+  overflow: auto;
 
   .message-group {
     margin: 1rem 0;
@@ -9,6 +13,12 @@
       width: 100%;
       display: flex;
       margin-top: .05rem;
+
+      .message-sender-avatar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
       .message-content {
         max-width: 60%;
@@ -36,6 +46,26 @@
           border-radius: 0 15px 15px 15px;
         }
       }
+
+      .message-button-container {
+        display: flex;
+        align-items: center;
+      }
+
+      .message-menu-button {
+        opacity: 0;
+        width: 36px;
+        height: 36px;
+        transition: 400ms all ease;
+      }
+
+      &:hover {
+        .message-menu-button {
+          display: block;
+          margin-left: .8rem;
+          opacity: 1;
+        }
+      }
     }
 
     &.mine {
@@ -60,6 +90,14 @@
           .message-content {
             border-bottom-left-radius: 15px;
             border-bottom-right-radius: 15px;
+          }
+        }
+
+        &:hover {
+          .message-menu-button {
+            display: block;
+            margin-left: 0;
+            margin-right: .8rem;
           }
         }
       }
