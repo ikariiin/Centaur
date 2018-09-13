@@ -36,11 +36,11 @@ export default class Conversation extends Component {
 
     this.setState({
       groupedConversation: mutated
-    }, () => this.bottom.scrollIntoView({behavior: 'smooth'}));
+    }, () => this.scrollToBottom());
   }
 
   scrollToBottom() {
-    this.lastEl.scrollIntoView({behavior: 'smooth'});
+    this.bottom.scrollIntoView({behavior: 'smooth'});
   }
 
   componentDidMount() {
