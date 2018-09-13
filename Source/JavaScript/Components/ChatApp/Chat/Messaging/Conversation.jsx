@@ -7,6 +7,8 @@ export default class Conversation extends Component {
     groupedConversation: []
   };
 
+  bottom = null;
+
   groupConvo() {
     const convo = this.props.conversation;
 
@@ -34,7 +36,11 @@ export default class Conversation extends Component {
 
     this.setState({
       groupedConversation: mutated
-    });
+    }, () => this.bottom.scrollIntoView({behavior: 'smooth'}));
+  }
+
+  scrollToBottom() {
+    this.lastEl.scrollIntoView({behavior: 'smooth'});
   }
 
   componentDidMount() {
@@ -49,6 +55,7 @@ export default class Conversation extends Component {
         {this.state.groupedConversation.map((conversation, index) => (
           <MessageGroup key={index} conversation={conversation} activeUsername={this.props.activeUsername} />
         ))}
+        <div ref={el => this.bottom = el}></div>
       </section>
     );
   }
