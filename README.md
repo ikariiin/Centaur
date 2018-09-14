@@ -23,4 +23,6 @@ node ExpressHandler.js
 
 Here are some screenshots to get you started.
 
+![register](https://cdn.discordapp.com/attachments/450672644090757142/490218004252983307/unknown.png)
+
 ![chat](https://cdn.discordapp.com/attachments/412309229878378500/490067456468189184/unknown.png)
