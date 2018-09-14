@@ -12,7 +12,6 @@ export default class ChatApp extends Component {
 
   setActiveChat = chatContext => {
     // This can probably be optimized, but its fine for now, I think?
-
     this.setState(prevState => {
       if(prevState.activeChat.includes(chatContext)) return;
 
