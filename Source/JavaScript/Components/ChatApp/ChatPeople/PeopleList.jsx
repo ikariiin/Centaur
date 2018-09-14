@@ -63,18 +63,20 @@ export default class PeopleList extends Component {
   render() {
     return (
       <section className="people-list">
-        {this.state.people.map((person, index) => (
-          <div tabIndex={1} className={`person ${this.state.activeChatContext.username === person['username'] && 'active'}`} key={index} role="button" onClick={() => this.changeChatContext(person)}>
-            <MoreVertIcon className="action-trigger" />
-            <Avatar className="person-avatar">
-              {person.username[0].toUpperCase()}
-            </Avatar>
-            <section className="details">
-              <div className="username">{person.username}</div>
-              <div className="last-message">{person.lastMessage}</div>
-            </section>
-          </div>
-        ))}
+        {this.state.people.length !== 0
+          ? (this.state.people.map((person, index) => (
+            <div tabIndex={1} className={`person ${this.state.activeChatContext.username === person['username'] && 'active'}`} key={index} role="button" onClick={() => this.changeChatContext(person)}>
+              <MoreVertIcon className="action-trigger" />
+              <Avatar className="person-avatar">
+                {person.username[0].toUpperCase()}
+              </Avatar>
+              <section className="details">
+                <div className="username">{person.username}</div>
+                <div className="last-message">{person.lastMessage}</div>
+              </section>
+            </div>
+          )))
+          : <div className="no-people">No people are sharing a chat session with you at this moment.</div>}
       </section>
     );
   }

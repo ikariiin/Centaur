@@ -6,13 +6,14 @@ import Navbar from "./Components/Navigation/Navbar";
 import ContextPageHandler from "./Components/ContextPage/ContextPageHandler";
 import {Subscriber} from "./Functional/Subscriber";
 import {SubscriptionsEnum} from "./Configuration/SubscriptionsEnum";
+import Register from "./Components/Register/Register";
 
 export default class AppMount extends Component {
   state = {
     // possible values are 'chat', 'profile', 'settings'
     context: 'chat',
     appStarted: false,
-    activeUsername: 'Kizuna'
+    activeUsername: null
   };
 
   static WS_URI = 'ws://localhost:3000/ws';
@@ -53,6 +54,12 @@ export default class AppMount extends Component {
     this.subscriber.subscribe([SubscriptionsEnum.server_state], (data) => this.serverStateMutationHandler(data));
   }
 
+  registerUser(data) {
+    this.setState({
+      activeUsername: data.username
+    });
+  }
+
   changeContext = context => this.setState({
     context
   });
@@ -62,14 +69,18 @@ export default class AppMount extends Component {
       <MuiThemeProvider theme={MaterialTheme}>
         {this.state.appStarted
           ? (
-            <React.Fragment>
-              <main className="content-space">
-                <ContextPageHandler context={this.state.context} websocket={this.webSocket} activeUsername={this.state.activeUsername} />
-              </main>
-              <footer className="nav-space">
-                <Navbar onChange={this.changeContext} />
-              </footer>
-            </React.Fragment>
+            this.state.activeUsername
+              ? (
+                <React.Fragment>
+                  <main className="content-space">
+                    <ContextPageHandler context={this.state.context} websocket={this.webSocket} activeUsername={this.state.activeUsername} />
+                  </main>
+                  <footer className="nav-space">
+                    <Navbar onChange={this.changeContext} />
+                  </footer>
+                </React.Fragment>
+              )
+              : <Register onRegister={(data) => this.registerUser(data)} />
           ): (<div>starting</div>)}
       </MuiThemeProvider>
     );

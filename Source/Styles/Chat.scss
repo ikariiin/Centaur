@@ -17,6 +17,16 @@
       height: calc(100% - 110px);
       margin-bottom: 110px;
 
+      .no-people {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.5rem;
+        opacity: .8;
+      }
+
       .person {
         transition: 200ms background-color ease-in;
         width: calc(100% - 2.4rem);
