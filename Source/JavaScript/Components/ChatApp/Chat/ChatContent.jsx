@@ -17,54 +17,9 @@ export default class ChatContent extends Component {
 
   state = {
     conversation: [{
-      sender: 'Kizuna',
-      content: 'Who is the best girl in Darker than Black?'
-    }, {
       sender: 'Ikari',
-      content: 'Amber!'
-    }, {
-      sender: 'Ikari',
-      content: 'Who else would it have beein?'
-    }, {
-      sender: 'Ikari',
-      content: 'Everybody else is shit!'
-    }, {
-      sender: 'Kizuna',
-      content: 'Who is the best girl in Darker than Black?'
-    }, {
-      sender: 'Ikari',
-      content: 'Amber!'
-    }, {
-      sender: 'Ikari',
-      content: 'Who else would it have beein?'
-    }, {
-      sender: 'Ikari',
-      content: 'Everybody else is shit!'
-    }, {
-      sender: 'Kizuna',
-      content: 'Who is the best girl in Darker than Black?'
-    }, {
-      sender: 'Ikari',
-      content: 'Amber!'
-    }, {
-      sender: 'Ikari',
-      content: 'Who else would it have beein?'
-    }, {
-      sender: 'Ikari',
-      content: 'Everybody else is shit!'
-    }, {
-      sender: 'Kizuna',
-      content: 'Who is the best girl in Darker than Black?'
-    }, {
-      sender: 'Ikari',
-      content: 'Amber!'
-    }, {
-      sender: 'Ikari',
-      content: 'Who else would it have beein?'
-    }, {
-      sender: 'Ikari',
-      content: 'Everybody else is shit!'
-    }, {
+      content: 'Hey there!'
+    },{
       sender: 'Kizuna',
       content: 'Who is the best girl in Darker than Black?'
     }, {
@@ -97,6 +52,18 @@ export default class ChatContent extends Component {
     this.subscriber.unsubscribe(ChatContent.subs);
   }
 
+  sendNewMessage(message) {
+    console.log(message);
+    this.setState(prevState => ({
+      conversation: [
+        ...prevState.conversation, {
+          sender: this.props.activeUsername,
+          content: message
+        }
+      ]
+    }));
+  }
+
   componentDidUpdate(prevProps) {
     if(this.props.chatContext !== prevProps.chatContext) {
       this.removePreviousSubscription();
@@ -116,7 +83,7 @@ export default class ChatContent extends Component {
             <React.Fragment>
               <ChatHeader context={this.props.chatContext} />
               <Conversation conversation={this.state.conversation} activeUsername={this.props.activeUsername} />
-              <InputForm />
+              <InputForm onMessageSend={(message) => this.sendNewMessage(message)} />
             </React.Fragment>
           )
           : <NoActiveChat />

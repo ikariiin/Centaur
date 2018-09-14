@@ -47,7 +47,13 @@ export default class Conversation extends Component {
     this.groupConvo();
   }
 
-  componentDidUpdate(prevProps) {}
+  componentDidUpdate(prevProps) {
+    if(prevProps.conversation !== this.props.conversation) {
+      // The possible reasons are that one of the messages was deleted or a new message was added.
+
+      this.groupConvo();
+    }
+  }
 
   render() {
     return (
@@ -55,7 +61,7 @@ export default class Conversation extends Component {
         {this.state.groupedConversation.map((conversation, index) => (
           <MessageGroup key={index} conversation={conversation} activeUsername={this.props.activeUsername} />
         ))}
-        <div ref={el => this.bottom = el}></div>
+        <div ref={el => this.bottom = el} />
       </section>
     );
   }
