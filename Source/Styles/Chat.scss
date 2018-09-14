@@ -83,6 +83,7 @@
       background: #DDD;
       color: #212121;
       font-weight: 300;
+      cursor: pointer;
 
       height: 38px;
       width: 38px;
@@ -122,7 +123,7 @@
       transition: 400ms all ease;
 
       &.open {
-        height: auto;
+        height: 25%;
         background: white;
         z-index: 1000;
       }

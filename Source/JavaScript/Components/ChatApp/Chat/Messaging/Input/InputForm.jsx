@@ -17,6 +17,27 @@ export default class InputForm extends Component {
     });
   }
 
+  handleSendPress(event) {
+    this.triggerSendMessage(this.state.inputValue);
+  }
+
+  handleKeyPress(event) {
+    if(event.keyCode === 13) {
+      // Handle enter
+      this.triggerSendMessage(this.state.inputValue);
+    }
+  }
+
+  triggerSendMessage(messageContent) {
+    console.log(`Message Send: ${messageContent}`);
+
+    this.props.onMessageSend(messageContent);
+
+    this.setState({
+      inputValue: ''
+    });
+  }
+
   render() {
     return (
       <section className="input-form">
@@ -28,9 +49,10 @@ export default class InputForm extends Component {
                  onChange={ev => this.updateInputValue(ev)}
                  value={this.state.inputValue}
                  placeholder="Start typing..."
+                 onKeyDown={(ev) => this.handleKeyPress(ev)}
           />
         </Paper>
-        <Button variant="extendedFab" color="secondary" className="send-button">
+        <Button variant="extendedFab" color="secondary" className="send-button" onClick={(ev) => this.handleSendPress(ev)}>
           <SendIcon style={{ marginRight: '.5rem' }} />
           Send
         </Button>
