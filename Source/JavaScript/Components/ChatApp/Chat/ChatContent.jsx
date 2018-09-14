@@ -6,6 +6,7 @@ import {Subscriber} from "../../../Functional/Subscriber";
 import {SubscriptionsEnum} from "../../../Configuration/SubscriptionsEnum";
 import InputForm from "./Messaging/Input/InputForm";
 import Conversation from "./Messaging/Conversation";
+import {Sender} from "../../../Functional/Sender";
 
 export default class ChatContent extends Component {
   static subs = [SubscriptionsEnum.conversation];
@@ -37,8 +38,16 @@ export default class ChatContent extends Component {
     this.subscriber.unsubscribe(ChatContent.subs);
   }
 
+  sendToSocket(message) {
+    const sender = new Sender(this.props.websocket);
+    sender.sendMessage(
+      this.props.activeUsername,
+      message,
+      this.props.chatContext.username
+    );
+  }
+
   sendNewMessage(message) {
-    console.log(message);
     this.setState(prevState => ({
       conversation: [
         ...prevState.conversation, {
@@ -47,10 +56,22 @@ export default class ChatContent extends Component {
         }
       ]
     }));
+
+    // Send a message
+    this.sendToSocket(message);
+  }
+
+  updateConversation() {
+    this.setState({
+      conversation: []
+    });
   }
 
   componentDidUpdate(prevProps) {
     if(this.props.chatContext !== prevProps.chatContext) {
+      // Update the conversation.
+      this.updateConversation();
+
       this.removePreviousSubscription();
       this.subscribeToContext(this.props.chatContext);
     }
@@ -62,18 +83,17 @@ export default class ChatContent extends Component {
 
   render() {
     return (
-      <Paper elevation={0} className="chat-content">
+      <React.Fragment>
         {this.props.chatContext
           ? (
-            <React.Fragment>
+            <Paper elevation={0} className="chat-content">
               <ChatHeader context={this.props.chatContext} />
               <Conversation conversation={this.state.conversation} activeUsername={this.props.activeUsername} />
               <InputForm onMessageSend={(message) => this.sendNewMessage(message)} />
-            </React.Fragment>
+            </Paper>
           )
-          : <NoActiveChat />
-        }
-      </Paper>
+          : <NoActiveChat />}
+      </React.Fragment>
     );
   }
 }

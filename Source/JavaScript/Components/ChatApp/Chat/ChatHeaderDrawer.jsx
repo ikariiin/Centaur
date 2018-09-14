@@ -9,8 +9,8 @@ export default class ChatHeaderDrawer extends Component {
         <MiniUserProfile username={this.props.username} />
         <section className="actions-container">
           <section className="buttons">
-            <Button variant="flat" color="primary">Open Profile</Button>
-            <Button variant="flat" color="primary">Close Chat</Button>
+            <Button variant="flat" color="default">Open Profile</Button>
+            <Button variant="flat" color="default">Close Chat</Button>
             <Button variant="flat" color="secondary">Finish Conversation</Button>
           </section>
         </section>
