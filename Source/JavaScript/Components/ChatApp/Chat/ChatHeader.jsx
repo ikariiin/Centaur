@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Toolbar from "@material-ui/core/Toolbar/Toolbar";
-import Avatar from "@material-ui/core/Avatar/Avatar";
 import Typography from "@material-ui/core/Typography/Typography";
 import AppBar from "@material-ui/core/AppBar/AppBar";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import MenuIcon from "@material-ui/icons/MenuOutlined";
 import ChatHeaderDrawer from "./ChatHeaderDrawer";
+import UserAvatar from "./Messaging/UserAvatar";
 
 export default class ChatHeader extends Component {
   state = {
@@ -26,7 +26,7 @@ export default class ChatHeader extends Component {
             <IconButton color="inherit" aria-label="Menu" style={{ marginLeft: -12, marginRight: 10 }} onClick={(ev) => this.toggleDrawer(ev)}>
               <MenuIcon />
             </IconButton>
-            <Avatar>{this.props.context.username[0].toUpperCase()}</Avatar>
+            <UserAvatar username={this.props.context.username} />
             <Typography variant="title" className="person-username">
               { this.props.context.username }
             </Typography>

@@ -24,6 +24,9 @@ export default class PeopleList extends Component {
     }, {
       username: 'Archer',
       lastMessage: 'Hey there douche.'
+    }, {
+      username: 'Ben',
+      lastMessage: 'Shut the fuck up, weeaboo.'
     }]
   };
 
@@ -61,7 +64,7 @@ export default class PeopleList extends Component {
     return (
       <section className="people-list">
         {this.state.people.map((person, index) => (
-          <div className={`person ${this.state.activeChatContext.username === person['username'] && 'active'}`} key={index} role="button" onClick={() => this.changeChatContext(person)}>
+          <div tabIndex={1} className={`person ${this.state.activeChatContext.username === person['username'] && 'active'}`} key={index} role="button" onClick={() => this.changeChatContext(person)}>
             <MoreVertIcon className="action-trigger" />
             <Avatar className="person-avatar">
               {person.username[0].toUpperCase()}

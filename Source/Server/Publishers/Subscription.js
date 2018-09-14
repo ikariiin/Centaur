@@ -10,6 +10,7 @@ class Subscription {
     this.conf = initMessage;
     this.messageData = initMessage.data;
     this.subscriptionProviders = [];
+    this.running = false;
   }
 
   run() {
@@ -47,6 +48,8 @@ class Subscription {
       }
     });
 
+    this.running = true;
+
     return this;
   }
 
@@ -67,6 +70,8 @@ class Subscription {
 
       return true;
     });
+
+    this.running = false;
   }
 }
 

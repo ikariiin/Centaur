@@ -25,6 +25,7 @@
         cursor: pointer;
         border-radius: 7px;
         position: relative;
+        outline: none;
 
         .action-trigger {
           position: absolute;
@@ -67,6 +68,14 @@
     }
   }
 
+  .chats-container {
+    display: flex;
+    flex-grow: 1;
+    height: 100%;
+    flex-basis: calc(500px);
+    overflow-x: auto;
+    margin: 0 1rem;
+  }
   .chat-content {
     margin: .5rem;
     border-radius: 7px;
@@ -75,22 +84,7 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    max-width: calc(((100% - 20%) / 3) - .5rem * 3);
-
-    .no-active-chat-display {
-      display: flex;
-      padding-left: 2.5rem;
-      background: rgba(0,0,0,.045);
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: rgba(0,0,0,.65);
-      border-radius: 7px;
-      width: calc(100% - 2.5rem);
-    }
+    //max-width: calc(33.33% - 1rem);
 
     .chat-header {
       border-radius: 7px 7px 0 0;
@@ -144,4 +138,19 @@
   height: 38px;
   width: 38px;
   border-radius: 50%;
+}
+
+.no-active-chat-display {
+  display: flex;
+  padding-left: 2.5rem;
+  background: rgba(0,0,0,.045);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: rgba(0,0,0,.65);
+  border-radius: 7px;
+  width: calc(100% - 2.5rem);
 }
