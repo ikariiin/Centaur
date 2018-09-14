@@ -16,22 +16,7 @@ export default class ChatContent extends Component {
   subscriber = null;
 
   state = {
-    conversation: [{
-      sender: 'Ikari',
-      content: 'Hey there!'
-    },{
-      sender: 'Kizuna',
-      content: 'Who is the best girl in Darker than Black?'
-    }, {
-      sender: 'Ikari',
-      content: 'Amber!'
-    }, {
-      sender: 'Ikari',
-      content: 'Who else would it have beein?'
-    }, {
-      sender: 'Ikari',
-      content: 'Everybody else is shit!'
-    }]
+    conversation: []
   };
 
   onConversationEvent(data) {

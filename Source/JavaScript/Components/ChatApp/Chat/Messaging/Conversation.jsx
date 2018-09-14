@@ -58,9 +58,15 @@ export default class Conversation extends Component {
   render() {
     return (
       <section className="conversation">
-        {this.state.groupedConversation.map((conversation, index) => (
-          <MessageGroup key={index} conversation={conversation} activeUsername={this.props.activeUsername} />
-        ))}
+        {this.state.groupedConversation.length === 0
+          ? (
+            <section className="empty-conversation">
+              No messages sent yet.
+            </section>
+          )
+          : (this.state.groupedConversation.map((conversation, index) => (
+            <MessageGroup key={index} conversation={conversation} activeUsername={this.props.activeUsername} />
+          )))}
         <div ref={el => this.bottom = el} />
       </section>
     );
