@@ -1,0 +1,46 @@
+@import "Colors";
+
+.mini-personal-profile, .mini-user-profile {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background-color: #212121 !important;
+  color: #eeeeee;
+  display: flex;
+
+  .avatar-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1.1rem;
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 .5rem;
+
+    .username {
+      font-weight: 500;
+      font-size: 1.2rem;
+      margin-bottom: .4rem;
+    }
+
+    .misc {
+      font-size: .85rem;
+      opacity: .85;
+    }
+  }
+}
+
+.mini-user-profile {
+  position: relative;
+
+  width: calc(100% - 2rem);
+  margin: 0 1rem;
+  background-color: $colorSecondary !important;
+}

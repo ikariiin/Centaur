@@ -1,26 +1,19 @@
 import React, { Component } from 'react';
-import List from "@material-ui/core/List/List";
-import ListItem from "@material-ui/core/ListItem/ListItem";
-import ListItemText from "@material-ui/core/ListItemText/ListItemText";
+import MiniUserProfile from "./Profile/MiniUserProfile";
+import Button from "@material-ui/core/Button/Button";
 
 export default class ChatHeaderDrawer extends Component {
   render() {
     return (
       <section className={`chat-user-drawer ${this.props.open ? 'open' : ''}`}>
-        <List>
-          <ListItem button={true}>
-            <ListItemText primary="Profile" />
-          </ListItem>
-          <ListItem button={true}>
-            <ListItemText primary="Some Other Stuff" />
-          </ListItem>
-          <ListItem button={true}>
-            <ListItemText primary="More Stuff" />
-          </ListItem>
-          <ListItem button={true}>
-            <ListItemText primary="Kewl Stuff" />
-          </ListItem>
-        </List>
+        <MiniUserProfile username={this.props.username} />
+        <section className="actions-container">
+          <section className="buttons">
+            <Button variant="flat" color="primary">Open Profile</Button>
+            <Button variant="flat" color="primary">Close Chat</Button>
+            <Button variant="flat" color="secondary">Finish Conversation</Button>
+          </section>
+        </section>
       </section>
     );
   }
