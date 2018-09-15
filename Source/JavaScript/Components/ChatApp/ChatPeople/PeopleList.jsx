@@ -3,6 +3,8 @@ import Avatar from "@material-ui/core/Avatar/Avatar";
 import {Subscriber} from "../../../Functional/Subscriber";
 import {SubscriptionsEnum} from "../../../Configuration/SubscriptionsEnum";
 import MoreVertIcon from '@material-ui/icons/MoreVertOutlined';
+import JoinCard from "./JoinCard";
+import {UserPair} from "../../../Functional/UserPair";
 
 export default class PeopleList extends Component {
   static subs = [
@@ -13,22 +15,23 @@ export default class PeopleList extends Component {
 
   state = {
     activeChatContext: {
-      username: null
+      username: null,
+      code: null
     },
-    people: [{
-      username: 'Ikari',
-      lastMessage: 'Everybody else is shit!'
-    }, {
-      username: 'Saitama',
-      lastMessage: 'You reckon you can finish it by saturday?'
-    }, {
-      username: 'Archer',
-      lastMessage: 'Hey there douche.'
-    }, {
-      username: 'Ben',
-      lastMessage: 'Shut the fuck up, weeaboo.'
-    }]
+    people: []
   };
+
+  addPerson(person, code) {
+    this.setState(prevState => ({
+      people: [
+        ...prevState.people,
+        {
+          ...person,
+          code
+        }
+      ]
+    }));
+  }
 
   componentDidMount() {
     this.subscriber = new Subscriber(
@@ -37,8 +40,20 @@ export default class PeopleList extends Component {
 
     this.subscriber.subscribe(
       PeopleList.subs,
-      (data) => this.handleData(data)
+      (data) => this.handleSubscriptionData(data)
     );
+
+    this.props.setAddNewPerson((person, code) => this.addPerson(person, code));
+    this.props.setOpenConversation((username, code) => this.openConversation(username, code))
+  }
+
+  openConversation(username, code) {
+    this.setState({
+      activeChatContext: {
+        username,
+        code
+      }
+    });
   }
 
   componentWillUnmount() {
@@ -51,12 +66,26 @@ export default class PeopleList extends Component {
     this.props.onChange(person);
     this.setState({
       activeChatContext: {
-        username: person['username']
+        username: person['username'],
+        code: person['code']
       }
     });
   }
 
-  handleData(data) {
+  requestPair(code) {
+    const userPair = new UserPair(this.props.websocket);
+    userPair.request(
+      code,
+      this.props.activeUsername,
+      this.props.joinCode,
+      (user) => this.addPerson(
+        user,
+        code
+      )
+    );
+  }
+
+  handleSubscriptionData(data) {
     console.log(data);
   }
 
@@ -72,11 +101,12 @@ export default class PeopleList extends Component {
               </Avatar>
               <section className="details">
                 <div className="username">{person.username}</div>
-                <div className="last-message">{person.lastMessage}</div>
+                <div className="about">{person.details.userAbout}</div>
               </section>
             </div>
           )))
           : <div className="no-people">No people are sharing a chat session with you at this moment.</div>}
+          <JoinCard joinCode={this.props.joinCode} requestPair={(code) => this.requestPair(code)} />
       </section>
     );
   }

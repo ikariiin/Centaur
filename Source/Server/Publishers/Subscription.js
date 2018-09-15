@@ -3,6 +3,7 @@ const ServerStateMutation = require("./Subscription/ServerStateMutation");
 const SubscriptionEnum = new (require('./SubscriptionsEnum'))();
 const UserHandler = require('./Subscription/UserHandler');
 const ConversationHandler = require('./Subscription/ConversationHandler');
+const ConversationStarter = require('./Subscription/ConversationStarter');
 
 class Subscription {
   constructor(websocket, initMessage) {
@@ -45,6 +46,12 @@ class Subscription {
           this.subscriptionProviders.push(
             (new ConversationHandler(this.conf.id, this.websocket, this.messageData)).start()
           );
+          break;
+        case SubscriptionEnum.conversation_start:
+          this.subscriptionProviders.push(
+            (new ConversationStarter(this.conf.id, this.websocket, this.messageData)).start()
+          );
+          break;
       }
     });
 

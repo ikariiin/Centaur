@@ -5,6 +5,7 @@ const Dispatcher = require('./Dispatcher');
 const dispatch = new Dispatcher();
 
 app.ws('/ws', function(ws, req) {
+
   ws.on('message', function(msg) {
     try {
       const parsedMessage = JSON.parse(msg);

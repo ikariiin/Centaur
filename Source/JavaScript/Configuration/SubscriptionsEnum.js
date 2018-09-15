@@ -6,4 +6,5 @@ export class SubscriptionsEnum {
   static server_state = 3;
 
   static conversation = 4;
+  static conversation_start = 5;
 }

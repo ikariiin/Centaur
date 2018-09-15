@@ -6,6 +6,7 @@ class UserHandler {
     this.type = type;
     this.id = id;
     this.websocket = websocket;
+    this.running = false;
   }
 
   getSubscriptionId() {
@@ -22,12 +23,12 @@ class UserHandler {
   stop() {
     // Clean up things
     ConsoleLogger.log(`Unsubscribing from ${this.id} for event #${this.getSubscriptionId()}`);
+    this.running = false;
   }
 
   start() {
     // Fist we begin by acknowledging the client that they subscribed to User-Mutations
     ConsoleLogger.log(`Subscription from ${this.id} for event #${this.getSubscriptionId()}`);
-
 
     this.websocket.send(JSON.stringify({
       id: this.id,
@@ -35,7 +36,22 @@ class UserHandler {
       status: 'Successfully subscribed to User-Mutations'
     }, null, 2));
 
+    this.running = true;
+
     return this;
+  }
+
+  onUserJoin(username, details) {
+    const payload = {
+      id: this.id,
+      type: 'event',
+      status: 'New user join',
+      data: {
+        username, details
+      }
+    };
+
+    this.websocket.send(JSON.stringify(payload, null, 2));
   }
 }
 

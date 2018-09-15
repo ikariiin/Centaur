@@ -7,6 +7,7 @@ class SubscriptionsEnum {
     this.server_state = 3;
 
     this.conversation = 4;
+    this.conversation_start = 5;
   }
 }
 

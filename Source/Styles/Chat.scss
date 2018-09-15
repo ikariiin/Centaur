@@ -17,8 +17,34 @@
       height: calc(100% - 110px);
       margin-bottom: 110px;
 
+      .join-code {
+        width: calc(100% - 2.4rem);
+        padding: 1rem 1.2rem;
+        border-radius: 7px;
+        position: relative;
+        background: rgba(0,0,0,.1);
+        margin-top: 1.5rem;
+
+        .title {
+          font-weight: 500;
+          font-size: .9rem;
+          opacity: .8;
+        }
+
+        .my-code-container {
+          font-size: .8rem;
+          margin-top: .2rem;
+
+          .my-code {
+            opacity: .7;
+            cursor: text;
+            margin-left: .1rem;
+          }
+        }
+      }
+
       .no-people {
-        height: 100%;
+        padding: 5rem 0;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -68,7 +94,7 @@
           .username {
             font-size: 1.2rem;
           }
-          .last-message {
+          .about {
             margin-top: .25rem;
             opacity: .85;
             font-size: .85rem;

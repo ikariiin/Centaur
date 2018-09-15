@@ -7,11 +7,11 @@ export default class ContextPageHandler extends Component {
   getPage() {
     switch (this.props.context) {
       case 'chat':
-        return <ChatPage websocket={this.props.websocket} activeUsername={this.props.activeUsername} />;
+        return <ChatPage {...this.props} />;
       case 'profile':
-        return <ProfilePage websocket={this.props.websocket} activeUsername={this.props.activeUsername} />;
+        return <ProfilePage {...this.props} />;
       case 'settings':
-        return <SettingsPage websocket={this.props.websocket} activeUsername={this.props.activeUsername} />;
+        return <SettingsPage {...this.props} />;
       default:
         throw new Error('Context not identified');
     }

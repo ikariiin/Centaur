@@ -37,11 +37,10 @@ export class Subscriber {
     this.websocket.addEventListener('message', event => {
       const data = JSON.parse(event.data);
 
+      if(data.id !== this.id) return;
+
       if(data.type === 'ack') {
         console.log('%c[sub]', 'font-weight: 700; color: #09599a;', 'Subscription acknowledged by server.');
-
-        // We don't want to pass an ack to the event handler.
-        return;
       }
 
       callback(data);
