@@ -50,6 +50,7 @@ export default class InputForm extends Component {
                  value={this.state.inputValue}
                  placeholder="Start typing..."
                  onKeyDown={(ev) => this.handleKeyPress(ev)}
+                 autoFocus={true}
           />
         </Paper>
         <Button variant="extendedFab" color="secondary" className="send-button" onClick={(ev) => this.handleSendPress(ev)}>

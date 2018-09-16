@@ -80,8 +80,14 @@ export default class PeopleList extends Component {
     );
   }
 
-  handleSubscriptionData(data) {
+  handleUserLeave(data) {
     console.log(data);
+  }
+
+  handleSubscriptionData(data) {
+    if(data.type === 'event user-leave') {
+      this.handleUserLeave();
+    }
   }
 
   render() {

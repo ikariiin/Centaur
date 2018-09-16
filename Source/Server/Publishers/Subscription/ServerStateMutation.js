@@ -5,6 +5,7 @@ class ServerStateMutation {
   constructor(id, websocket, data) {
     this.websocket = websocket;
     this.id = id;
+    this.running = false;
   }
 
   getSubscriptionId() {
@@ -14,6 +15,8 @@ class ServerStateMutation {
   stop() {
     // Clean up stuff here.
     ConsoleLogger.log(`Unsubscribing from ${this.id} for event #${SubscriptionEnum.server_state}`);
+
+    this.running = false;
   }
 
   start() {
@@ -25,6 +28,8 @@ class ServerStateMutation {
       type: 'ack',
       status: 'Successfully subscribed to Server-State-Mutation'
     }, null, 2));
+
+    this.running = true;
 
     return this;
   }

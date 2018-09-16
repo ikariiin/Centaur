@@ -13,11 +13,11 @@ class UserRegistrar {
     // TODO
 
     Object.values(this.subscriptions).forEach(subscription => {
-      if(!subscription) return;
+      if(typeof subscription === 'undefined') return;
 
       if(subscription.conf.subscriptions.includes(SubscriptionEnum.user_join)) {
         subscription.subscriptionProviders.forEach(provider => {
-          if(provider.getSubscriptionId() === SubscriptionEnum.user_join) {
+          if(provider.getSubscriptionId() === SubscriptionEnum.user_join && provider.running) {
             provider.onUserJoin(this.message.username, this.message.details);
           }
         });
@@ -38,7 +38,7 @@ class UserRegistrar {
 
     this.websocket.send(JSON.stringify(registeredMessagePayload, null, 2));
 
-    return new User(username, details);
+    return new User(username, details, this.subscriptions, this.message);
   }
 }
 

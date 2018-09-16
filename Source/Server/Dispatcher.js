@@ -30,6 +30,8 @@ class Dispatcher {
       for( let id in this.onlineUsers ) {
         if(this.onlineUsers.hasOwnProperty(id) && this.onlineUsers[id].username !== username) {
           removedUsers[id] = this.onlineUsers[id];
+        } else {
+          this.onlineUsers[id].unregister();
         }
       }
 

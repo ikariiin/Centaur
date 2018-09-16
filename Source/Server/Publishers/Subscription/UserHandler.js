@@ -53,6 +53,23 @@ class UserHandler {
 
     this.websocket.send(JSON.stringify(payload, null, 2));
   }
+
+  onUserLeave(username, code, details) {
+    const payload = {
+      id: this.id,
+      type: 'event user-leave',
+      status: 'An user left.',
+      code,
+      data: {
+        username, details
+      },
+    };
+
+    // RUNNING
+    if(this.websocket.readyState === 1) {
+      this.websocket.send(JSON.stringify(payload, null, 2));
+    }
+  }
 }
 
 module.exports = UserHandler;

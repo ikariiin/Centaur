@@ -6,6 +6,7 @@ class ConversationHandler {
     this.id = id;
     this.ws = ws;
     this.data = data;
+    this.running = false;
   }
 
   getSubscriptionId() {
@@ -15,6 +16,8 @@ class ConversationHandler {
   stop() {
     // Clean up stuff here.
     ConsoleLogger.log(`Unsubscribing from ${this.id} for event #${SubscriptionEnum.conversation}`);
+
+    this.running = false;
   }
 
   start() {
@@ -26,6 +29,8 @@ class ConversationHandler {
       type: 'ack',
       status: 'Successfully subscribed to Conversation-Mutation'
     }, null, 2));
+
+    this.running = true;
 
     return this;
   }

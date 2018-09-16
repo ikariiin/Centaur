@@ -21,9 +21,11 @@ class PairRequestHandler {
 
   startConversationForPair() {
     Object.values(this.subscriptions).forEach(subscription => {
+      if(typeof subscription === 'undefined') return;
+
       if(subscription.conf.subscriptions.includes(SubscriptionEnum.conversation_start)) {
         subscription.subscriptionProviders.forEach(provider => {
-          if(provider.getSubscriptionId() === SubscriptionEnum.conversation_start) {
+          if(provider.getSubscriptionId() === SubscriptionEnum.conversation_start && provider.running) {
             provider.onNewConversation(this.message.myJoinCode, this.message.code, this.users[this.message.myJoinCode]);
           }
         });
@@ -46,7 +48,7 @@ class PairRequestHandler {
       type: 'pair-response',
       status: 'Successfully paired!',
       success: true,
-      user: this.users[this.message.code]
+      user: this.users[this.message.code].getSerializeableObject()
     });
     this.startConversationForPair();
   }

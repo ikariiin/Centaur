@@ -6,6 +6,7 @@ class ConversationStarter {
     this.id = id;
     this.ws = ws;
     this.data = data;
+    this.running = false;
   }
 
   getSubscriptionId() {
@@ -15,6 +16,8 @@ class ConversationStarter {
   stop() {
     // Clean up stuff here.
     ConsoleLogger.log(`Unsubscribing from ${this.id} for event #${SubscriptionEnum.conversation_start}`);
+
+    this.running = true;
   }
 
   start() {
@@ -26,6 +29,8 @@ class ConversationStarter {
       status: 'Successfully subscribed to Conversation-Starter'
     }, null, 2));
 
+    this.running = true;
+
     return this;
   }
 
@@ -34,7 +39,7 @@ class ConversationStarter {
       id: this.id,
       type: 'event',
       status: 'New conversation started',
-      data: user,
+      data: user.getSerializeableObject(),
       joinCode,
       pairWith: code
     }, null, 2));
