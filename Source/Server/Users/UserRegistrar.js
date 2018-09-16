@@ -13,6 +13,8 @@ class UserRegistrar {
     // TODO
 
     Object.values(this.subscriptions).forEach(subscription => {
+      if(!subscription) return;
+
       if(subscription.conf.subscriptions.includes(SubscriptionEnum.user_join)) {
         subscription.subscriptionProviders.forEach(provider => {
           if(provider.getSubscriptionId() === SubscriptionEnum.user_join) {

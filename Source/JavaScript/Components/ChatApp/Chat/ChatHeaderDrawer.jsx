@@ -6,7 +6,7 @@ export default class ChatHeaderDrawer extends Component {
   render() {
     return (
       <section className={`chat-user-drawer ${this.props.open ? 'open' : ''}`}>
-        <MiniUserProfile username={this.props.username} />
+        <MiniUserProfile {...this.props} />
         <section className="actions-container">
           <section className="buttons">
             <Button variant="flat" color="default">Open Profile</Button>

@@ -30,10 +30,13 @@ export default class ChatApp extends Component {
   };
 
   handleConversationStart(data) {
-    if(data.joinCode === this.props.joinCode || data.type === 'ack') return;
+    if(data.pairWith !== this.props.joinCode || data.type !== 'event') return;
 
     this.addNewPerson(data.data, data.joinCode);
-    this.openConversation(data.data.username, data.joinCode);
+    this.openConversation({
+      ...data.data,
+      code: data.joinCode
+    });
   }
 
   componentDidMount() {

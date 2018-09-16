@@ -3,7 +3,7 @@ import UserAvatar from "../../Chat/Messaging/UserAvatar";
 import "../../../../../Styles/MiniProfiles.scss";
 import Paper from "@material-ui/core/Paper/Paper";
 
-export default class MiniPersonalProfile extends Component {
+export default class MiniUserProfile extends Component {
   render() {
     return (
       <Paper elevation={4} className="mini-user-profile">
@@ -13,7 +13,7 @@ export default class MiniPersonalProfile extends Component {
         <section className="details">
           <section className="username">{this.props.username}</section>
           <section className="misc">
-            We are gonna have some super important stuff here about the user here.
+            {this.props.details.userAbout.trim().length === 0 ? 'This user likes to keep a mystery surrounding them' : this.props.details.userAbout}
           </section>
         </section>
       </Paper>

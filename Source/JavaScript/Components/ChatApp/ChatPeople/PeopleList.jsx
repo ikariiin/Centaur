@@ -31,6 +31,10 @@ export default class PeopleList extends Component {
         }
       ]
     }));
+    this.changeChatContext({
+      ...person,
+      code
+    });
   }
 
   componentDidMount() {
@@ -44,16 +48,7 @@ export default class PeopleList extends Component {
     );
 
     this.props.setAddNewPerson((person, code) => this.addPerson(person, code));
-    this.props.setOpenConversation((username, code) => this.openConversation(username, code))
-  }
-
-  openConversation(username, code) {
-    this.setState({
-      activeChatContext: {
-        username,
-        code
-      }
-    });
+    this.props.setOpenConversation((person) => this.changeChatContext(person))
   }
 
   componentWillUnmount() {
@@ -101,7 +96,7 @@ export default class PeopleList extends Component {
               </Avatar>
               <section className="details">
                 <div className="username">{person.username}</div>
-                <div className="about">{person.details.userAbout}</div>
+                <div className="about">{person.details.userAbout.trim().length === 0 ? 'This user likes to keep a mystery surrounding them' : person.details.userAbout}</div>
               </section>
             </div>
           )))

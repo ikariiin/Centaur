@@ -13,7 +13,7 @@ export default class MiniPersonalProfile extends Component {
         <section className="details">
           <section className="username">{this.props.activeUsername}</section>
           <section className="misc">
-            We are gonna have some super important stuff here about the user here.
+            {this.props.activeUserAbout.trim().length === 0 ? 'This user likes to keep a mystery surrounding them' : this.props.activeUserAbout}
           </section>
         </section>
       </Paper>

@@ -29,13 +29,14 @@ class ConversationStarter {
     return this;
   }
 
-  onNewConversation(joinCode, user) {
+  onNewConversation(joinCode, code, user) {
     this.ws.send(JSON.stringify({
       id: this.id,
       type: 'event',
       status: 'New conversation started',
       data: user,
       joinCode,
+      pairWith: code
     }, null, 2));
   }
 }

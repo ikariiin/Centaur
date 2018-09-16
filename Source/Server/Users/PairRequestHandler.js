@@ -24,7 +24,7 @@ class PairRequestHandler {
       if(subscription.conf.subscriptions.includes(SubscriptionEnum.conversation_start)) {
         subscription.subscriptionProviders.forEach(provider => {
           if(provider.getSubscriptionId() === SubscriptionEnum.conversation_start) {
-            provider.onNewConversation(this.message.myJoinCode, this.users[this.message.myJoinCode]);
+            provider.onNewConversation(this.message.myJoinCode, this.message.code, this.users[this.message.myJoinCode]);
           }
         });
       }

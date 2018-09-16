@@ -32,7 +32,7 @@ export default class ChatHeader extends Component {
             </Typography>
           </Toolbar>
         </AppBar>
-        <ChatHeaderDrawer open={this.state.drawerOpen} username={this.props.context.username} />
+        <ChatHeaderDrawer open={this.state.drawerOpen} username={this.props.context.username} details={this.props.context.details} />
       </React.Fragment>
     );
   }

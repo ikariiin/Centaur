@@ -84,7 +84,13 @@ export default class AppMount extends Component {
               ? (
                 <React.Fragment>
                   <main className="content-space">
-                    <ContextPageHandler context={this.state.context} websocket={this.webSocket} activeUsername={this.state.activeUsername} joinCode={this.state.joinCode} />
+                    <ContextPageHandler
+                      context={this.state.context}
+                      websocket={this.webSocket}
+                      activeUsername={this.state.activeUsername}
+                      activeUserAbout={this.state.userAbout}
+                      joinCode={this.state.joinCode}
+                    />
                   </main>
                   <footer className="nav-space">
                     <Navbar onChange={this.changeContext} />
