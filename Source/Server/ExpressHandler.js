@@ -9,6 +9,7 @@ app.ws('/ws', function(ws, req) {
   ws.on('message', function(msg) {
     try {
       const parsedMessage = JSON.parse(msg);
+      ws.setMaxListeners(500000);
 
       dispatch.start(ws, parsedMessage);
     } catch (e) {

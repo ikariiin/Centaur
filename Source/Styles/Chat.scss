@@ -54,14 +54,30 @@
       }
 
       .person {
-        transition: 200ms background-color ease-in;
-        width: calc(100% - 2.4rem);
+        transition: 250ms all cubic-bezier(0.0, 0.0, 0.2, 1);
+        width: calc(100% - 3rem);
         padding: 1rem 1.2rem;
         display: flex;
         cursor: pointer;
         border-radius: 7px;
         position: relative;
         outline: none;
+        margin: 0 .3rem;
+
+        &:hover {
+          background: rgba(0,0,0,.08);
+          .action-trigger {
+            opacity: .85;
+          }
+        }
+        &.active {
+          background: #009688;
+          color: #FFFFFF;
+          box-shadow: 0 10px 13px -6px rgba(0,0,0,.2), 0 21px 33px 3px rgba(0,0,0,.14), 0 8px 40px 7px rgba(0,0,0,.12);
+          width: calc(100% - 1rem);
+          padding: 1rem 1.5rem;
+          margin: 1.8rem 0 1.8rem -.5rem;
+        }
 
         .action-trigger {
           position: absolute;
@@ -69,15 +85,6 @@
           right: .2rem;
           opacity: 0;
           transition: 400ms all;
-        }
-
-        &:hover, &.active {
-          background: rgba(0,0,0,.08);
-        }
-        &:hover {
-          .action-trigger {
-            opacity: .85;
-          }
         }
 
         .person-avatar {
@@ -114,7 +121,7 @@
   }
   .chat-content {
     margin: .5rem;
-    border-radius: 7px;
+    border-radius: 13px;
     position: relative;
     background: rgba(0,0,0,.05);
     display: flex;
@@ -123,7 +130,7 @@
     //max-width: calc(33.33% - 1rem);
 
     .chat-header {
-      border-radius: 7px 7px 0 0;
+      border-radius: 13px 13px 0 0;
 
       .person-username {
         color: #ffffff;
@@ -187,7 +194,15 @@
   font-size: 1.3rem;
   font-weight: 700;
   color: rgba(0,0,0,.65);
-  border-radius: 7px;
+  border-radius: 13px;
   width: calc(100% - 2.5rem);
   margin-top: 1rem;
+}
+
+.conversation-over-notify {
+  padding: 1.5rem 1rem;
+  font-size: .9rem;
+  font-weight: 500;
+  color: #e53935;
+  text-align: center;
 }

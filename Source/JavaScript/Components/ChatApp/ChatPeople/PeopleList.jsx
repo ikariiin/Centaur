@@ -16,7 +16,9 @@ export default class PeopleList extends Component {
   state = {
     activeChatContext: {
       username: null,
-      code: null
+      code: null,
+      details: null,
+      active: true
     },
     people: []
   };
@@ -60,12 +62,16 @@ export default class PeopleList extends Component {
   }
 
   changeChatContext(person) {
-    this.props.onChange(person);
+    this.props.onChange({
+      ...person,
+      active: true
+    });
     this.setState({
       activeChatContext: {
         username: person['username'],
         details: person['details'],
-        code: person['code']
+        code: person['code'],
+        active: true
       }
     });
   }
@@ -98,12 +104,26 @@ export default class PeopleList extends Component {
   }
 
   handleUserLeave(data) {
-    console.log(data);
+    const leaveUserCode = data.code;
+    if(this.state.people.map(person => person.code).filter(code => code === leaveUserCode).length !== 0) {
+      this.setState(prevState => ({
+        people: prevState.people.filter(person => person.code !== leaveUserCode)
+      }));
+      // Check if the same person is in the active chat context. If yes, close the current chat context.
+      if(this.state.activeChatContext.code === leaveUserCode) {
+        this.setState(prevState => ({
+          activeChatContext: {
+            ...prevState.activeChatContext,
+            active: false
+          }
+        }), () => this.props.onChange(this.state.activeChatContext));
+      }
+    }
   }
 
   handleSubscriptionData(data) {
     if(data.type === 'event user-leave') {
-      this.handleUserLeave();
+      this.handleUserLeave(data);
     }
   }
 

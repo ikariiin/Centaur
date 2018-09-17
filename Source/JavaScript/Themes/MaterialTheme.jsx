@@ -10,10 +10,10 @@ export const MaterialTheme = createMuiTheme({
       contrastText: '#ffffff'
     },
     secondary: {
-      main: '#e91e63',
+      main: '#eb5a00',
       contrastText: '#ffffff',
-      light: '#ff6090',
-      dark: '#b0003a'
+      light: '#ef7b33',
+      dark: '#a43e00'
     },
   },
   typography: {

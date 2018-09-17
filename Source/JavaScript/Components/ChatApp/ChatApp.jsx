@@ -14,7 +14,7 @@ export default class ChatApp extends Component {
     ]
   };
   addNewPerson = (person, code) => {};
-  openConversation = (username, code) => {};
+  openConversation = (person) => {};
 
   setActiveChat = chatContext => {
     // This can probably be optimized, but its fine for now, I think?
@@ -35,7 +35,8 @@ export default class ChatApp extends Component {
     this.addNewPerson(data.data, data.joinCode);
     this.openConversation({
       ...data.data,
-      code: data.joinCode
+      code: data.joinCode,
+      active: true
     });
   }
 

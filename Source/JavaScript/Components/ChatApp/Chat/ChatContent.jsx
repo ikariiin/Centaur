@@ -7,6 +7,7 @@ import {SubscriptionsEnum} from "../../../Configuration/SubscriptionsEnum";
 import InputForm from "./Messaging/Input/InputForm";
 import Conversation from "./Messaging/Conversation";
 import {Sender} from "../../../Functional/Sender";
+import {ConversationOver} from "./ConversationOver";
 
 export default class ChatContent extends Component {
   static subs = [SubscriptionsEnum.conversation];
@@ -89,7 +90,9 @@ export default class ChatContent extends Component {
             <Paper elevation={0} className="chat-content">
               <ChatHeader context={this.props.chatContext} />
               <Conversation conversation={this.state.conversation} activeUsername={this.props.activeUsername} />
-              <InputForm onMessageSend={(message) => this.sendNewMessage(message)} />
+              {this.props.chatContext.active
+                ? <InputForm onMessageSend={(message) => this.sendNewMessage(message)} />
+                : <ConversationOver />}
             </Paper>
           )
           : <NoActiveChat />}
