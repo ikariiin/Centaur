@@ -21,7 +21,7 @@ class PairRequestHandler {
 
   startConversationForPair() {
     Object.values(this.subscriptions).forEach(subscription => {
-      if(typeof subscription === 'undefined') return;
+      if(typeof subscription === 'undefined' || typeof subscription.conf === 'undefined') return;
 
       if(subscription.conf.subscriptions.includes(SubscriptionEnum.conversation_start)) {
         subscription.subscriptionProviders.forEach(provider => {

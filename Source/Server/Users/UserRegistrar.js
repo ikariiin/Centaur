@@ -13,7 +13,7 @@ class UserRegistrar {
     // TODO
 
     Object.values(this.subscriptions).forEach(subscription => {
-      if(typeof subscription === 'undefined') return;
+      if(typeof subscription === 'undefined' || typeof subscription.conf === 'undefined') return;
 
       if(subscription.conf.subscriptions.includes(SubscriptionEnum.user_join)) {
         subscription.subscriptionProviders.forEach(provider => {

@@ -22,14 +22,24 @@ export default class ChatContent extends Component {
   };
 
   onConversationEvent(data) {
-    console.log(data);
+    if(data.type === "event message-send") {
+      this.setState(prevState => ({
+        conversation: [
+          ...prevState.conversation, {
+            sender: data.fromUsername,
+            content: data.message
+          }
+        ]
+      }));
+    }
   }
 
   subscribeToContext(context) {
     // Here we should be subscribing to another user in the websocket stream.
     const subscriber = new Subscriber(this.props.websocket);
     subscriber.subscribe(ChatContent.subs, (data) => this.onConversationEvent(data), {
-      ...context
+      ...context,
+      myCode: this.props.joinCode
     });
     this.subscriber = subscriber;
   }
@@ -44,7 +54,9 @@ export default class ChatContent extends Component {
     sender.sendMessage(
       this.props.activeUsername,
       message,
-      this.props.chatContext.username
+      this.props.chatContext.username,
+      this.props.chatContext.code,
+      this.props.joinCode
     );
   }
 

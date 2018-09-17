@@ -14,7 +14,7 @@ class User {
 
   alertUnRegisterSubscribers() {
     Object.values(this.subscriptions).forEach(subscription => {
-      if(typeof subscription === 'undefined') return;
+      if(typeof subscription === 'undefined' || typeof subscription.conf === 'undefined') return;
 
       if(subscription.conf.subscriptions.includes(SubscriptionEnum.user_leave)) {
         subscription.subscriptionProviders.forEach(provider => {

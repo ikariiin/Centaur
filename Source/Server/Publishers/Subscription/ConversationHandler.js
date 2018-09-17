@@ -34,6 +34,17 @@ class ConversationHandler {
 
     return this;
   }
+
+  send(fromUsername, fromCode, message) {
+    this.ws.send(JSON.stringify({
+      id: this.id,
+      type: 'event message-send',
+      status: 'New message',
+      fromUsername,
+      fromCode,
+      message
+    }, null, 2));
+  }
 }
 
 module.exports = ConversationHandler;
