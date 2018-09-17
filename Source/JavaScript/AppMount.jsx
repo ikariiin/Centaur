@@ -19,7 +19,7 @@ export default class AppMount extends Component {
     joinCode: null
   };
 
-  static WS_URI = `ws://${window.location.host}`;
+  static WS_URI = `ws://${window.location.host}:3000`;
 
   /**
    * @type {WebSocket}
