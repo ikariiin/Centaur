@@ -4,16 +4,18 @@ class Sender {
   constructor(websocket, message, subs) {
     this.websocket = websocket;
     this.message = message;
-    this.subStore = subs;
+    this.subscriptions = subs;
   }
 
   run() {
-    Object.entries(this.subStore).map(sub => sub[1]).forEach((sub) => {
-      /** @type Subscriber sub */
-      if(!sub.running) return;
+    Object.values(this.subscriptions).forEach((subscription) => {
+      if(typeof subscription === 'undefined') return;
 
-      if(sub.conf.subscriptions.includes(SubscriptionEnum.conversation) && sub.conf.data.username === this.message.to) {
-        console.log(`Message to ${sub.conf.data.username}: ${this.message.message}`);
+      if(subscription.conf.subscriptions.includes(SubscriptionEnum.conversation)) {
+        subscription.subscriptionProviders.forEach(provider => {
+          if(provider.getSubscriptionId() === SubscriptionEnum.conversation && provider.running) {
+          }
+        });
       }
     });
     return this;

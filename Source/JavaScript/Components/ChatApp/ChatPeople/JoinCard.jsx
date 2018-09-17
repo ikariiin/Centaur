@@ -22,7 +22,9 @@ export default class JoinCard extends Component {
   }
 
   addUser() {
-    this.props.requestPair(this.state.codeInputValue);
+    if(this.state.codeInputValue.trim().length !== 0) {
+      this.props.requestPair(this.state.codeInputValue);
+    }
     this.setState({
       // processing: true,
       codeInputValue: ''

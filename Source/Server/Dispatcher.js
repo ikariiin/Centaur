@@ -16,11 +16,21 @@ class Dispatcher {
     ws.addEventListener('close', () => {
       // Here we fake an incoming unsubscribe message
 
-      this.dispatchedClientPublishers.subscriptions[message.id].unsubscribe({
-        ...message,
-        type: 'unsubscribe'
-      });
-    })
+      const finalSubscriptions = {};
+
+      for( let id in this.dispatchedClientPublishers.subscriptions ) {
+        if(this.dispatchedClientPublishers.subscriptions.hasOwnProperty(id) && id !== message.id) {
+          finalSubscriptions[id] = this.dispatchedClientPublishers.subscriptions[id];
+        } else {
+          this.dispatchedClientPublishers.subscriptions[id].unsubscribe({
+            ...message,
+            type: 'unsubscribe'
+          });
+        }
+      }
+
+      this.dispatchedClientPublishers.subscriptions = finalSubscriptions;
+    });
   }
 
   addDeRegisterOnClose(ws, username) {

@@ -21,7 +21,7 @@ export default class PeopleList extends Component {
     people: []
   };
 
-  addPerson(person, code) {
+  addPerson(person, code, switchContext = true) {
     this.setState(prevState => ({
       people: [
         ...prevState.people,
@@ -31,10 +31,12 @@ export default class PeopleList extends Component {
         }
       ]
     }));
-    this.changeChatContext({
-      ...person,
-      code
-    });
+    if(switchContext) {
+      this.changeChatContext({
+        ...person,
+        code
+      });
+    }
   }
 
   componentDidMount() {
@@ -62,13 +64,28 @@ export default class PeopleList extends Component {
     this.setState({
       activeChatContext: {
         username: person['username'],
+        details: person['details'],
         code: person['code']
       }
     });
   }
 
+  checkIfConnected(code) {
+    return this.state.people.map(person => person.code).includes(code);
+  }
+
   requestPair(code) {
     const userPair = new UserPair(this.props.websocket);
+    // We cannot allow the user to pair with himself
+    if(code === this.props.joinCode) return;
+
+    // Check if we are already connected to them
+    if(this.checkIfConnected(code)) {
+      const requiredPerson = this.state.people.filter(person => person.code === code)[0];
+      this.changeChatContext(requiredPerson);
+      return;
+    }
+
     userPair.request(
       code,
       this.props.activeUsername,
