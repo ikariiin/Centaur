@@ -23,14 +23,24 @@ export default class ChatContent extends Component {
 
   onConversationEvent(data) {
     if(data.type === "event message-send") {
-      this.setState(prevState => ({
-        conversation: [
-          ...prevState.conversation, {
-            sender: data.fromUsername,
-            content: data.message
-          }
-        ]
-      }));
+      const message = {
+        sender: data.fromUsername,
+        content: data.message
+      };
+      if(data.fromCode === this.props.chatContext.code) {
+        this.setState(prevState => ({
+          conversation: [
+            ...prevState.conversation, {
+              ...message
+            }
+          ]
+        }));
+        this.props.storeAppendConversation(data.fromCode, message);
+      } else {
+        // Also put a notification somewhere for a new message has been received?
+        this.props.showNotification(<span className="new-message-notify">New message from {data.fromUsername}: <b>{data.message}</b></span>);
+        this.props.storeAppendConversation(data.fromCode, message);
+      }
     }
   }
 
@@ -69,6 +79,10 @@ export default class ChatContent extends Component {
         }
       ]
     }));
+    this.props.storeAppendConversation(this.props.chatContext.code, {
+      sender: this.props.activeUsername,
+      content: message
+    });
 
     // Send a message
     this.sendToSocket(message);
@@ -76,7 +90,7 @@ export default class ChatContent extends Component {
 
   updateConversation() {
     this.setState({
-      conversation: []
+      conversation: this.props.chatContext ? this.props.storeGetConversation(this.props.chatContext.code) : []
     });
   }
 
@@ -92,6 +106,10 @@ export default class ChatContent extends Component {
 
   componentWillUnmount() {
     this.removePreviousSubscription();
+  }
+
+  componentDidMount() {
+    this.updateConversation();
   }
 
   render() {

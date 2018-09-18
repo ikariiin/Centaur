@@ -2,19 +2,38 @@ import React from 'react';
 
 export default class ChatStore extends React.Component {
   store = {
-    people: {},
-    conversations: {}
+    people: [],
+    conversation: {},
+    activeChatContext: {
+      username: null,
+      code: null,
+      details: null,
+      active: true
+    }
   };
 
-  addPerson(code, person) {
-    this.store.people[code] = person;
-
-    console.log(this.store)
+  storeAddPerson(person) {
+    this.store.people.push(person);
   }
 
-  putConversation(code, conversation) {
-    this.store.conversations[code] = conversation;
-    console.log(this.store)
+  storeSetActiveChatContext(context) {
+    this.store.activeChatContext = context;
+  }
+
+  storeAppendConversation(code, message) {
+    // Check if there is already a conversation array present
+    // or at least if it is defined.
+    if(this.store.conversation[code] === undefined) {
+      // Then create an empty array in its place
+      this.store.conversation[code] = [];
+    }
+
+    this.store.conversation[code].push(message);
+  }
+
+  storeGetConversation(code) {
+    // Same routine. If it is not defined, send an empty array.
+    return (this.store.conversation[code] === undefined) ? [] : this.store.conversation[code];
   }
 
   render() {
@@ -22,10 +41,11 @@ export default class ChatStore extends React.Component {
       <React.Fragment>
         {React.cloneElement(this.props.children, {
           chatStore: this.store,
-          addPerson: (person) => this.addPerson(person),
-          putConversation: (code, conversation) => this.putConversation(code, conversation)
+          storeAddPerson: (person) => this.storeAddPerson(person),
+          storeAppendConversation: (code, message) => this.storeAppendConversation(code, message),
+          storeSetActiveChatContext: (context) => this.storeSetActiveChatContext(context),
+          storeGetConversation: (code) => this.storeGetConversation(code)
         })}
-        { console.log(this.store) }
       </React.Fragment>
     );
   }

@@ -9,6 +9,7 @@ import {SubscriptionsEnum} from "./Configuration/SubscriptionsEnum";
 import Register from "./Components/Register/Register";
 import {Registrar} from "./Functional/Registrar";
 import ChatStore from "./Components/ChatApp/Chat/ChatStore";
+import {SnackbarNotify} from "./Components/Notification/SnackbarNotify";
 
 export default class AppMount extends Component {
   state = {
@@ -17,7 +18,10 @@ export default class AppMount extends Component {
     appStarted: false,
     activeUsername: null,
     userAbout: null,
-    joinCode: null
+    joinCode: null,
+    showNotification: false,
+    notificationMessage: null,
+    notificationActions: []
   };
 
   static WS_URI = `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.host}/ws`;
@@ -76,6 +80,22 @@ export default class AppMount extends Component {
     context
   });
 
+  showNotification(message, action) {
+    this.setState({
+      showNotification: true,
+      notificationMessage: message,
+      notificationActions: action
+    });
+  }
+
+  closeNotification() {
+    this.setState({
+      showNotification: false,
+      notificationMessage: '',
+      notificationActions: []
+    });
+  }
+
   render() {
     return (
       <MuiThemeProvider theme={MaterialTheme}>
@@ -84,6 +104,12 @@ export default class AppMount extends Component {
             this.state.activeUsername
               ? (
                 <React.Fragment>
+                  <SnackbarNotify
+                    open={this.state.showNotification}
+                    onClose={() => this.closeNotification()}
+                    message={this.state.notificationMessage}
+                    actions={this.state.notificationActions}
+                  />
                   <main className="content-space">
                     <ChatStore>
                       <ContextPageHandler
@@ -92,6 +118,8 @@ export default class AppMount extends Component {
                         activeUsername={this.state.activeUsername}
                         activeUserAbout={this.state.userAbout}
                         joinCode={this.state.joinCode}
+                        showNotification={(message, actions = []) => this.showNotification(message, actions)}
+                        closeNotification={() => this.closeNotification()}
                       />
                     </ChatStore>
                   </main>
