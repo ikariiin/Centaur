@@ -8,6 +8,7 @@ import {Subscriber} from "./Functional/Subscriber";
 import {SubscriptionsEnum} from "./Configuration/SubscriptionsEnum";
 import Register from "./Components/Register/Register";
 import {Registrar} from "./Functional/Registrar";
+import ChatStore from "./Components/ChatApp/Chat/ChatStore";
 
 export default class AppMount extends Component {
   state = {
@@ -84,13 +85,15 @@ export default class AppMount extends Component {
               ? (
                 <React.Fragment>
                   <main className="content-space">
-                    <ContextPageHandler
-                      context={this.state.context}
-                      websocket={this.webSocket}
-                      activeUsername={this.state.activeUsername}
-                      activeUserAbout={this.state.userAbout}
-                      joinCode={this.state.joinCode}
-                    />
+                    <ChatStore>
+                      <ContextPageHandler
+                        context={this.state.context}
+                        websocket={this.webSocket}
+                        activeUsername={this.state.activeUsername}
+                        activeUserAbout={this.state.userAbout}
+                        joinCode={this.state.joinCode}
+                      />
+                    </ChatStore>
                   </main>
                   <footer className="nav-space">
                     <Navbar onChange={this.changeContext} />

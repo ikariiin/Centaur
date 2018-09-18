@@ -39,6 +39,11 @@ export default class PeopleList extends Component {
         code
       });
     }
+
+    this.props.addPerson(code, {
+      ...person,
+      code
+    });
   }
 
   componentDidMount() {
@@ -132,7 +137,15 @@ export default class PeopleList extends Component {
       <section className="people-list">
         {this.state.people.length !== 0
           ? (this.state.people.map((person, index) => (
-            <div tabIndex={1} className={`person ${this.state.activeChatContext.username === person['username'] && 'active'}`} key={index} role="button" onClick={this.state.activeChatContext.username === person['username'] ? (() => {}) : (() => this.changeChatContext(person))}>
+            <div
+              tabIndex={1}
+              className={`person ${this.state.activeChatContext.username === person['username'] && 'active'}`}
+              key={index}
+              role="button"
+              onClick={this.state.activeChatContext.username === person['username']
+                ? (() => {})
+                : (() => this.changeChatContext(person))}
+            >
               <MoreVertIcon className="action-trigger" />
               <Avatar className="person-avatar">
                 {person.username[0].toUpperCase()}
