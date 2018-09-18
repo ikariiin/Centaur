@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import "../Styles/CentaurBase.scss";
 import MuiThemeProvider from "@material-ui/core/es/styles/MuiThemeProvider";
 import {MaterialTheme} from "./Themes/MaterialTheme";
-import Navbar from "./Components/Navigation/Navbar";
+// import Navbar from "./Components/Navigation/Navbar";
 import ContextPageHandler from "./Components/ContextPage/ContextPageHandler";
 import {Subscriber} from "./Functional/Subscriber";
 import {SubscriptionsEnum} from "./Configuration/SubscriptionsEnum";
 import Register from "./Components/Register/Register";
 import {Registrar} from "./Functional/Registrar";
 import ChatStore from "./Components/ChatApp/Chat/ChatStore";
-import {SnackbarNotify} from "./Components/Notification/SnackbarNotify";
 
 export default class AppMount extends Component {
   state = {
@@ -18,13 +17,14 @@ export default class AppMount extends Component {
     appStarted: false,
     activeUsername: null,
     userAbout: null,
-    joinCode: null,
-    showNotification: false,
-    notificationMessage: null,
-    notificationActions: []
+    joinCode: null
   };
 
   static WS_URI = `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.host}/ws`;
+
+  static NOTIFICATION_OPTIONS = {
+    icon: '/Resources/Images/materialistic.jpg'
+  };
 
   /**
    * @type {WebSocket}
@@ -80,20 +80,32 @@ export default class AppMount extends Component {
     context
   });
 
-  showNotification(message, action) {
-    this.setState({
-      showNotification: true,
-      notificationMessage: message,
-      notificationActions: action
-    });
-  }
+  showNotification(message, callback) {
+    let notification = null;
 
-  closeNotification() {
-    this.setState({
-      showNotification: false,
-      notificationMessage: '',
-      notificationActions: []
-    });
+    if(!("Notification" in window)) return;
+
+    else if (Notification.permission === "granted") {
+      // If it's okay let's create a notification
+      notification = new Notification('New Message!', {
+        ...AppMount.NOTIFICATION_OPTIONS,
+        body: message
+      });
+    }
+
+    else if (Notification.permission !== "denied") {
+      Notification.requestPermission((permission) => {
+        // If the user accepts, let's create a notification
+        if (permission === "granted") {
+          notification = new Notification('New Message!', {
+            ...AppMount.NOTIFICATION_OPTIONS,
+            body: message
+          });
+        }
+      });
+    }
+
+    notification.addEventListener('click', () => callback());
   }
 
   render() {
@@ -104,12 +116,6 @@ export default class AppMount extends Component {
             this.state.activeUsername
               ? (
                 <React.Fragment>
-                  <SnackbarNotify
-                    open={this.state.showNotification}
-                    onClose={() => this.closeNotification()}
-                    message={this.state.notificationMessage}
-                    actions={this.state.notificationActions}
-                  />
                   <main className="content-space">
                     <ChatStore>
                       <ContextPageHandler
@@ -118,8 +124,7 @@ export default class AppMount extends Component {
                         activeUsername={this.state.activeUsername}
                         activeUserAbout={this.state.userAbout}
                         joinCode={this.state.joinCode}
-                        showNotification={(message, actions = []) => this.showNotification(message, actions)}
-                        closeNotification={() => this.closeNotification()}
+                        showNotification={(message, callback) => this.showNotification(message, callback)}
                       />
                     </ChatStore>
                   </main>

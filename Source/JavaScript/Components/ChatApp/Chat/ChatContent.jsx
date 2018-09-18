@@ -38,7 +38,7 @@ export default class ChatContent extends Component {
         this.props.storeAppendConversation(data.fromCode, message);
       } else {
         // Also put a notification somewhere for a new message has been received?
-        this.props.showNotification(<span className="new-message-notify">New message from {data.fromUsername}: <b>{data.message}</b></span>);
+        this.props.showNotification(`${data.fromUsername}: ${data.message}`);
         this.props.storeAppendConversation(data.fromCode, message);
       }
     }
