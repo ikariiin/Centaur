@@ -123,9 +123,9 @@ export default class AppMount extends Component {
                       />
                     </ChatStore>
                   </main>
-                  <footer className="nav-space">
-                    <Navbar onChange={this.changeContext} />
-                  </footer>
+                  {/*<footer className="nav-space">*/}
+                    {/*<Navbar onChange={this.changeContext} />*/}
+                  {/*</footer>*/}
                 </React.Fragment>
               )
               : <Register onRegister={(data) => this.registerUser(data)} />

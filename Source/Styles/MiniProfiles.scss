@@ -6,9 +6,15 @@
   left: 0;
   width: 100%;
   height: 100px;
-  background-color: $colorPrimaryDark !important;
-  color: $colorPrimaryContrastText;
+  background-color: rgba(0,0,0,.1) !important;
+  color: #363636;
   display: flex;
+  box-shadow: none !important;
+
+  .user-avatar {
+    background: $colorSecondary !important;
+    color: $colorSecondaryContrastText !important;
+  }
 
   .avatar-container {
     height: 100%;

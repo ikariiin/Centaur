@@ -16,6 +16,7 @@
       border-radius: 7px;
       height: calc(100% - 110px);
       margin-bottom: 110px;
+      overflow: auto;
 
       .join-code {
         width: calc(100% - 2.4rem);
@@ -55,7 +56,7 @@
 
       .person {
         transition: 250ms all cubic-bezier(0.0, 0.0, 0.2, 1);
-        width: calc(100% - 3rem);
+        width: calc(100% - 2.7rem);
         padding: 1rem 1.2rem;
         display: flex;
         cursor: pointer;
@@ -71,12 +72,13 @@
           }
         }
         &.active {
-          background: #009688;
+          background: $colorPrimary;
           color: #FFFFFF;
-          box-shadow: 0 10px 13px -6px rgba(0,0,0,.2), 0 21px 33px 3px rgba(0,0,0,.14), 0 8px 40px 7px rgba(0,0,0,.12);
-          width: calc(100% - 1rem);
-          padding: 1rem 1.5rem;
-          margin: 1.8rem 0 1.8rem -.5rem;
+          // box-shadow: 0 10px 13px -6px rgba(0,0,0,.2), 0 21px 33px 3px rgba(0,0,0,.14), 0 8px 40px 7px rgba(0,0,0,.12);
+          //width: calc(100% - 1rem);
+          //padding: 1rem 1.5rem;
+          //margin: 1.8rem 0 1.8rem -.5rem;
+          margin: 1rem .3rem;
         }
 
         .action-trigger {
