@@ -48,10 +48,16 @@
 
         &.image-message {
           width: 50%;
-          border-radius: 15px;
+          border-top-left-radius: 15px;
+          border-top-right-radius: 15px;
           display: flex;
           flex-direction: column;
           padding: 0;
+
+          &.bottom-radius {
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+          }
 
           .image {
             width: 100%;
