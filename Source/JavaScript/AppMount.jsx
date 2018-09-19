@@ -20,7 +20,7 @@ export default class AppMount extends Component {
     joinCode: null
   };
 
-  static WS_URI = `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.host}/ws`;
+  static WS_URI = `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.hostname}:3000/ws`;
 
   static NOTIFICATION_OPTIONS = {
     icon: '/Resources/Images/materialistic.jpg'
@@ -81,31 +81,26 @@ export default class AppMount extends Component {
   });
 
   showNotification(message, callback) {
-    let notification = null;
-
-    if(!("Notification" in window)) return;
-
-    else if (Notification.permission === "granted") {
-      // If it's okay let's create a notification
-      notification = new Notification('New Message!', {
-        ...AppMount.NOTIFICATION_OPTIONS,
-        body: message
-      });
+    if(!("Notification" in window)) {
+      return;
     }
 
-    else if (Notification.permission !== "denied") {
-      Notification.requestPermission((permission) => {
-        // If the user accepts, let's create a notification
-        if (permission === "granted") {
-          notification = new Notification('New Message!', {
-            ...AppMount.NOTIFICATION_OPTIONS,
-            body: message
-          });
-        }
-      });
-    }
+    const ifAllowed = () => new Notification('New Message!', {
+      ...AppMount.NOTIFICATION_OPTIONS,
+      body: message
+    });
 
-    notification.addEventListener('click', () => callback());
+    if(Notification.permission !== "denied") {
+      if (Notification.permission === "granted") {
+        ifAllowed().addEventListener('click', () => callback());
+      } else {
+        Notification.requestPermission(permission => {
+          if(permission === 'granted') {
+            ifAllowed().addEventListener('click', () => callback());
+          }
+        });
+      }
+    }
   }
 
   render() {
@@ -124,12 +119,12 @@ export default class AppMount extends Component {
                         activeUsername={this.state.activeUsername}
                         activeUserAbout={this.state.userAbout}
                         joinCode={this.state.joinCode}
-                        showNotification={(message, callback) => this.showNotification(message, callback)}
+                        showNotification={(message, callback = () => {}) => this.showNotification(message, callback)}
                       />
                     </ChatStore>
                   </main>
                   {/*<footer className="nav-space">*/}
-                    {/*<Navbar onChange={this.changeContext} />*/}
+                  {/*<Navbar onChange={this.changeContext} />*/}
                   {/*</footer>*/}
                 </React.Fragment>
               )

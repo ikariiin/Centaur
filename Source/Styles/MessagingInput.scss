@@ -5,12 +5,15 @@
   flex-direction: row;
   align-items: center;
   padding: 0 1.5rem;
+  background: rgba(255,255,255,.1);
+  border-radius: 0 0 13px 13px;
 
   .input-container {
     height: calc(100% - 1.5rem);
     margin: .75rem 1rem .75rem;
-    border-radius: 30px;
+    border-radius: 37px;
     flex-grow: 1;
+    background: #212121 !important;
 
     display: flex;
     align-items: center;
@@ -22,10 +25,11 @@
       flex-grow: 1;
       display: block;
       line-height: 1.7;
-      color: rgba(0,0,0,.9);
+      color: rgba(255,255,255,.9);
       font-family: inherit;
       font-size: .95rem;
       margin-left: .5rem;
+      background: transparent;
     }
   }
 

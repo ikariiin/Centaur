@@ -4,11 +4,14 @@ import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import FriendAddIcon from "@material-ui/icons/PersonAddOutlined";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
+import AddIcon from "@material-ui/icons/AddOutlined";
+import NegateIcon from "@material-ui/icons/RemoveOutlined";
 
 export default class JoinCard extends Component {
   state = {
     codeInputValue: '',
-    processing: false
+    processing: false,
+    collapsed: true
   };
 
   updateCodeInputValue(event) {
@@ -37,6 +40,20 @@ export default class JoinCard extends Component {
     }
   }
 
+  getCollapseToggleButton() {
+    if(this.state.collapsed) {
+      return <AddIcon style={{ fontSize: 'inherit', color: 'inherit' }} />;
+    } else {
+      return <NegateIcon style={{ fontSize: 'inherit', color: 'inherit' }} />;
+    }
+  }
+
+  toggleCollapse() {
+    this.setState(prevState => ({
+      collapsed: !prevState.collapsed
+    }));
+  }
+
   render() {
     return (
       <section className="join-code">
@@ -44,30 +61,43 @@ export default class JoinCard extends Component {
           ? <div className="processing-container">Processing</div>
           : (
             <React.Fragment>
-              <div className="title">Already have a join code from a friend?</div>
-              <TextField
-                label="Join Code"
-                fullWidth
-                onChange={(ev) => this.updateCodeInputValue(ev)}
-                value={this.state.codeInputValue}
-                onKeyDown={(ev) => this.handleEnterPress(ev)}
-                margin="dense"
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton>
-                        <FriendAddIcon onClick={() => this.addUser()} />
-                      </IconButton>
-                    </InputAdornment>
-                  )
-                }}
-              />
-              <div className="my-code-container">
-                Your join code:
-                <Tooltip title="Click to copy">
-                  <span className="my-code" onClick={() => this.copyToClipboard()}>{this.props.joinCode}</span>
+              <div className="title" onClick={() => this.toggleCollapse()}>
+                <section className="text-content">
+                  Join Code, already have one? Get yours.
+                </section>
+                <Tooltip title="Toggle Collapse">
+                  <div className="toggle-button">
+                    {this.getCollapseToggleButton()}
+                  </div>
                 </Tooltip>
               </div>
+              {!this.state.collapsed && (
+                <React.Fragment>
+                  <TextField
+                    label="Join Code"
+                    fullWidth
+                    onChange={(ev) => this.updateCodeInputValue(ev)}
+                    value={this.state.codeInputValue}
+                    onKeyDown={(ev) => this.handleEnterPress(ev)}
+                    margin="dense"
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton>
+                            <FriendAddIcon onClick={() => this.addUser()} />
+                          </IconButton>
+                        </InputAdornment>
+                      )
+                    }}
+                  />
+                  <div className="my-code-container">
+                    Your join code:
+                    <Tooltip title="Click to copy">
+                      <span className="my-code" onClick={() => this.copyToClipboard()}>{this.props.joinCode}</span>
+                    </Tooltip>
+                  </div>
+                </React.Fragment>
+              )}
             </React.Fragment>
           )}
       </section>

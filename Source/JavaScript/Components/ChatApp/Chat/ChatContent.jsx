@@ -71,6 +71,8 @@ export default class ChatContent extends Component {
   }
 
   sendNewMessage(message) {
+    if(message.trim().length === 0) return;
+
     this.setState(prevState => ({
       conversation: [
         ...prevState.conversation, {

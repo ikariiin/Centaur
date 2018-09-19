@@ -37,7 +37,6 @@ export default class RegisterForm extends Component {
             />
             <RegisterInput
               icon={<EditIcon style={{ fontSize: 'inherit' }} />}
-              long={true}
               label="Something about yourself"
               value={this.state.about}
               onChange={this.changeField('about')}

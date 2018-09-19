@@ -3,7 +3,7 @@ import Toolbar from "@material-ui/core/Toolbar/Toolbar";
 import Typography from "@material-ui/core/Typography/Typography";
 import AppBar from "@material-ui/core/AppBar/AppBar";
 import IconButton from "@material-ui/core/IconButton/IconButton";
-import MenuIcon from "@material-ui/icons/MenuOutlined";
+import InfoIcon from "@material-ui/icons/InfoOutlined";
 import ChatHeaderDrawer from "./ChatHeaderDrawer";
 import UserAvatar from "./Messaging/UserAvatar";
 
@@ -24,7 +24,7 @@ export default class ChatHeader extends Component {
         <AppBar position="static" color="primary" className="chat-header">
           <Toolbar>
             <IconButton color="inherit" aria-label="Menu" style={{ marginLeft: -12, marginRight: 10 }} onClick={(ev) => this.toggleDrawer(ev)}>
-              <MenuIcon />
+              <InfoIcon />
             </IconButton>
             <UserAvatar username={this.props.context.username} />
             <Typography variant="title" className="person-username">
@@ -32,7 +32,7 @@ export default class ChatHeader extends Component {
             </Typography>
           </Toolbar>
         </AppBar>
-        <ChatHeaderDrawer open={this.state.drawerOpen} username={this.props.context.username} details={this.props.context.details} />
+        {/*<ChatHeaderDrawer open={this.state.drawerOpen} username={this.props.context.username} details={this.props.context.details} />*/}
       </React.Fragment>
     );
   }
