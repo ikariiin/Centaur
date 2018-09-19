@@ -35,14 +35,16 @@ class ConversationHandler {
     return this;
   }
 
-  send(fromUsername, fromCode, message) {
+  send(fromUsername, fromCode, message, data) {
+    console.log('data: ', data);
     this.ws.send(JSON.stringify({
       id: this.id,
       type: 'event message-send',
       status: 'New message',
       fromUsername,
       fromCode,
-      message
+      message,
+      data
     }, null, 2));
   }
 }

@@ -45,6 +45,25 @@
         border-bottom-right-radius: 15px;
         font-size: .9rem;
         word-break: break-all;
+
+        &.image-message {
+          width: 50%;
+          border-radius: 15px;
+          display: flex;
+          flex-direction: column;
+          padding: 0;
+
+          .image {
+            width: 100%;
+            height: 300px;
+            background-size: cover;
+            border-radius: 15px;
+          }
+
+          .content {
+            padding: .85rem .6rem;
+          }
+        }
       }
 
       .blank-sender-avatar {

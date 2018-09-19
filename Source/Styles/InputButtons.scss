@@ -1,0 +1,18 @@
+.input-buttons {
+  display: flex;
+  width: 0;
+  transition: 200ms all cubic-bezier(0.0, 0.0, 0.2, 1);
+  overflow: hidden;
+  align-items: center;
+  justify-content: space-around;
+
+  &.open {
+    width: 140px;
+  }
+
+  .opt {
+    height: 2.5rem !important;
+    width: 2.5rem !important;
+    font-size: 1.2rem !important;
+  }
+}

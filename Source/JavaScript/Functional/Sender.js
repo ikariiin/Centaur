@@ -15,7 +15,7 @@ export class Sender {
     this.websocket = websocket;
   }
 
-  sendMessage(senderUsername, messageContent, receiverUsername, receiverCode, myCode) {
+  sendMessage(senderUsername, messageContent, receiverUsername, receiverCode, myCode, data) {
     const payload = {
       type: 'message-send',
       from: senderUsername,
@@ -23,7 +23,8 @@ export class Sender {
       to: receiverUsername,
       id: this.id,
       code: receiverCode,
-      myCode
+      myCode,
+      data
     };
 
     this.websocket.send(JSON.stringify(payload, null, 2));

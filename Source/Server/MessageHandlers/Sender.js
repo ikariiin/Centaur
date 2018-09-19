@@ -22,7 +22,8 @@ class Sender {
               provider.send(
                 this.message.from,
                 this.message.myCode,
-                this.message.message
+                this.message.message,
+                this.message.data
               );
             }
           }

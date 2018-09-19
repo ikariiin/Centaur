@@ -25,7 +25,8 @@ export default class ChatContent extends Component {
     if(data.type === "event message-send") {
       const message = {
         sender: data.fromUsername,
-        content: data.message
+        content: data.message,
+        data: data.data
       };
       if(data.fromCode === this.props.chatContext.code) {
         this.setState(prevState => ({
@@ -36,11 +37,12 @@ export default class ChatContent extends Component {
           ]
         }));
         this.props.storeAppendConversation(data.fromCode, message);
-      } else {
-        // Also put a notification somewhere for a new message has been received?
-        this.props.showNotification(`${data.fromUsername}: ${data.message}`);
-        this.props.storeAppendConversation(data.fromCode, message);
+        return;
       }
+
+      // Also put a notification somewhere for a new message has been received?
+      this.props.showNotification(`${data.fromUsername}: ${data.message}`);
+      this.props.storeAppendConversation(data.fromCode, message);
     }
   }
 
@@ -59,35 +61,36 @@ export default class ChatContent extends Component {
     this.subscriber.unsubscribe(ChatContent.subs);
   }
 
-  sendToSocket(message) {
+  sendToSocket(message, data) {
     const sender = new Sender(this.props.websocket);
     sender.sendMessage(
       this.props.activeUsername,
       message,
       this.props.chatContext.username,
       this.props.chatContext.code,
-      this.props.joinCode
+      this.props.joinCode,
+      data
     );
   }
 
-  sendNewMessage(message) {
-    if(message.trim().length === 0) return;
-
+  sendNewMessage(message, data) {
     this.setState(prevState => ({
       conversation: [
         ...prevState.conversation, {
           sender: this.props.activeUsername,
-          content: message
+          content: message,
+          data
         }
       ]
     }));
     this.props.storeAppendConversation(this.props.chatContext.code, {
       sender: this.props.activeUsername,
-      content: message
+      content: message,
+      data
     });
 
     // Send a message
-    this.sendToSocket(message);
+    this.sendToSocket(message, data);
   }
 
   updateConversation() {
@@ -123,10 +126,9 @@ export default class ChatContent extends Component {
               <ChatHeader context={this.props.chatContext} />
               <Conversation conversation={this.state.conversation} activeUsername={this.props.activeUsername} />
               {this.props.chatContext.active
-                ? <InputForm onMessageSend={(message) => this.sendNewMessage(message)} />
+                ? <InputForm onMessageSend={(message, data = {}) => this.sendNewMessage(message, data)} {...this.props} />
                 : <ConversationOver />}
-            </Paper>
-          )
+            </Paper>)
           : <NoActiveChat />}
       </React.Fragment>
     );
