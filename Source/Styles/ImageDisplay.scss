@@ -1,0 +1,28 @@
+.image-display-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: .1px;
+  height: .1px;
+  overflow: hidden;
+  transition: 300ms all cubic-bezier(0.0, 0.0, 0.2, 1);
+  z-index: 1500;
+
+  &.open {
+    top: 0;
+    left: 0;
+    width: calc(100% - 4rem);
+    height: calc(100% - 4rem);
+    background: rgba(0,0,0,.8);
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .image-display {
+      max-height: 100%;
+      width: auto;
+      border-radius: 10px;
+    }
+  }
+}
