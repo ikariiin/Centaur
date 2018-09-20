@@ -4,6 +4,8 @@ import IconButton from "@material-ui/core/IconButton/IconButton";
 import MoreVertIcon from '@material-ui/icons/MoreVertOutlined';
 import InfoIcon from '@material-ui/icons/InfoOutlined';
 import ReactMarkdown from 'react-markdown';
+import ImageMessage from "./ImageMessage";
+import YoutubeMessage from "./YoutubeMessage";
 
 export default class Message extends Component {
   static getParsedMessage(content) {
@@ -12,19 +14,19 @@ export default class Message extends Component {
 
   analyzeMessage() {
     const message = this.props.message;
-    if(message.data.flag === 'image') {
-      // We need to return an image-y message
-      const imageData = message.data.imageBase64;
+
+    if(/(youtu\.?be)\/.+$/.test(message.content)) {
+      const ytId = /(youtu\.?be)\/.+$/.exec(message.content)[0].split('/')[1];
 
       return (
-        <section className="message-content image-message">
-          <div className={`image ${message.content.length === 0 && 'bottom-radius'}`} style={{ backgroundImage: `url(${imageData})` }} />
-          {message.content.length !== 0 && (
-            <section className="content">
-              {Message.getParsedMessage(message.content)}
-            </section>
-          )}
-        </section>
+        <YoutubeMessage message={message} ytId={ytId} />
+      );
+    }
+
+    if(message.data.flag === 'image') {
+      // We need to return an image-y message
+      return (
+        <ImageMessage message={message} />
       );
     }
 

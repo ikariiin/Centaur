@@ -46,7 +46,7 @@
         border-top-right-radius: 15px;
         border-bottom-right-radius: 15px;
         font-size: .9rem;
-        word-break: break-all;
+        word-break: break-word;
 
         &.image-message {
           width: 50%;
@@ -61,6 +61,37 @@
             background-size: cover;
             border-radius: 15px 15px 0 0;
             cursor: pointer;
+
+            &.bottom-radius {
+              border-bottom-left-radius: 15px;
+              border-bottom-right-radius: 15px;
+            }
+          }
+
+          .content {
+            padding: .85rem .6rem;
+          }
+        }
+        &.youtube-message {
+          width: 50%;
+          border-radius: 15px !important;
+          display: flex;
+          flex-direction: column;
+          padding: 0;
+
+          .youtube {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            padding-top: 25px;
+            height: 0;
+
+            .yt-iframe {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+            }
 
             &.bottom-radius {
               border-bottom-left-radius: 15px;
