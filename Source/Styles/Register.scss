@@ -38,7 +38,8 @@
       }
 
       &.form {
-        background: #FFFFFF;
+        background: #212121;
+        color: #FFF;
       }
       &.about {
         background: #ee0979;  /* fallback for old browsers */
@@ -87,7 +88,7 @@
   transition: 200ms all cubic-bezier(0.0, 0.0, 0.2, 1);
   cursor: text;
   margin: .7rem 0;
-  background: #EDEDED !important;
+  background: rgba(255,255,255,.2) !important;
 
   &.not-focused {
     box-shadow: none !important;
@@ -121,6 +122,7 @@
       margin-left: .5rem;
       resize: none;
       background: transparent;
+      color: #FFF;
 
       &.long {
         padding: .2rem 0;

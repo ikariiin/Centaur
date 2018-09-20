@@ -3,8 +3,13 @@ import UserAvatar from "./UserAvatar";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import MoreVertIcon from '@material-ui/icons/MoreVertOutlined';
 import InfoIcon from '@material-ui/icons/InfoOutlined';
+import ReactMarkdown from 'react-markdown';
 
 export default class Message extends Component {
+  static getParsedMessage(content) {
+    return <ReactMarkdown source={content} />
+  }
+
   analyzeMessage() {
     const message = this.props.message;
     if(message.data.flag === 'image') {
@@ -16,7 +21,7 @@ export default class Message extends Component {
           <div className={`image ${message.content.length === 0 && 'bottom-radius'}`} style={{ backgroundImage: `url(${imageData})` }} />
           {message.content.length !== 0 && (
             <section className="content">
-              {message.content}
+              {Message.getParsedMessage(message.content)}
             </section>
           )}
         </section>
@@ -25,7 +30,7 @@ export default class Message extends Component {
 
     return (
       <section className="message-content">
-        {message.content}
+        {Message.getParsedMessage(message.content)}
       </section>
     );
   }

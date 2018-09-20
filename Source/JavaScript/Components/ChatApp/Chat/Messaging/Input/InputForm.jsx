@@ -29,9 +29,10 @@ export default class InputForm extends Component {
   }
 
   handleKeyPress(event) {
-    if(event.keyCode === 13) {
+    if(event.keyCode === 13 && !event.shiftKey) {
       // Handle enter
       this.triggerSendMessage(this.state.inputValue);
+      event.preventDefault();
     }
   }
 
@@ -95,12 +96,12 @@ export default class InputForm extends Component {
               <AddIcon />
             </IconButton>
             <InputButtons onImageUpload={(file, base64) => this.onImageUpload(file, base64)} visible={this.state.inputButtons} {...this.props} />
-            <input className="input-element"
-                   onChange={ev => this.updateInputValue(ev)}
-                   value={this.state.inputValue}
-                   placeholder="Start typing..."
-                   onKeyDown={(ev) => this.handleKeyPress(ev)}
-                   autoFocus={true}
+            <textarea className="input-element"
+                      onChange={ev => this.updateInputValue(ev)}
+                      value={this.state.inputValue}
+                      placeholder="Start typing..."
+                      onKeyDown={(ev) => this.handleKeyPress(ev)}
+                      autoFocus={true}
             />
           </Paper>
           <Button variant="extendedFab" color="secondary" className="send-button" onClick={(ev) => this.handleSendPress(ev)}>

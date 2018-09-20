@@ -25,8 +25,4 @@ Here are some screenshots to get you started.
 
 ![register](https://cdn.discordapp.com/attachments/450672644090757142/490962395121057807/unknown.png)
 
-![chat](https://cdn.discordapp.com/attachments/450672644090757142/491292902870351883/unknown.png)
-
-![bar](https://cdn.discordapp.com/attachments/450672644090757142/490219130113228851/unknown.png)
-
-![images](https://cdn.discordapp.com/attachments/413919411712425984/492030895545516032/unknown.png)
+![chat](https://cdn.discordapp.com/attachments/412309229878378500/492236299047272448/unknown.png)

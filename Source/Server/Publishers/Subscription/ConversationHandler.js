@@ -36,7 +36,6 @@ class ConversationHandler {
   }
 
   send(fromUsername, fromCode, message, data) {
-    console.log('data: ', data);
     this.ws.send(JSON.stringify({
       id: this.id,
       type: 'event message-send',
