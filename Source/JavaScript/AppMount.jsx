@@ -20,7 +20,7 @@ export default class AppMount extends Component {
     joinCode: null
   };
 
-  static WS_URI = `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.hostname}:3000/ws`;
+  static WS_URI = `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.host}/ws`;
 
   static NOTIFICATION_OPTIONS = {
     icon: '/Resources/Images/materialistic.jpg'
