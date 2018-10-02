@@ -12,13 +12,13 @@ How to start a development state:
 # clone the repo
 
 cd Centaur
-npm install
-npm run dev
+cd Source/Server/
+node ExpressHandler.js
 
 # on another cmd / terminal process
 
-cd Source/Server/
-node ExpressHandler.js
+npm install
+npm run dev
 ```
 
 Here are some screenshots to get you started.
