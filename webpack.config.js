@@ -66,7 +66,16 @@ module.exports = {
     extensions: ['.js', '.jsx']
   },
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
+    proxy: {
+      "/ws": {
+        target: "ws://localhost:3000",
+        ws: true
+      },
+      "/": {
+        target: "http://localhost:3000"
+      }
+    }
   },
   mode: "production"
 };
