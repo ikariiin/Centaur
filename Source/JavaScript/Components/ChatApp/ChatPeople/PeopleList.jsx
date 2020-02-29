@@ -59,6 +59,9 @@ export default class PeopleList extends Component {
     this.props.setAddNewPerson((person, code) => this.addPerson(person, code));
     this.props.setOpenConversation((person) => this.changeChatContext(person));
 
+    // Get the join code from the uri hash if present
+    this.joinFromHashFragment();
+
     this.setState({
       people: this.props.chatStore.people,
       activeChatContext: this.props.chatStore.activeChatContext
@@ -67,6 +70,17 @@ export default class PeopleList extends Component {
         this.props.onChange(this.props.chatStore.activeChatContext);
       }
     });
+  }
+
+  joinFromHashFragment() {
+    if(window.checkLoad_PEOPLE_LIST) return;
+    const hashFragment = window.location.hash;
+    if(hashFragment.trim().length === 0) return;
+    const pairsArray = hashFragment.substr(1, hashFragment.length - 1).split('&').map(pair => { pair = pair.split('='); return { [pair[0]]: pair[1] }; });
+    let pairs = {};
+    pairsArray.forEach(pair => pairs = {...pairs, ...pair});
+    this.requestPair(pairs.join);
+    window.checkLoad_PEOPLE_LIST = pairs.join;
   }
 
   componentWillUnmount() {

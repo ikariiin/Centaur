@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --optimize-dedupe --optimize-minify",
-    "dev": "webpack-dev-server --content-base src --hot --inline --open"
+    "dev": "webpack-dev-server --content-base src --hot --inline --open",
+    "start": "node Source/Server/ExpressHandler.js"
   },
   "repository": {
     "type": "git",
@@ -39,11 +40,12 @@
     "style-loader": "^0.21.0",
     "webpack": "^4.41.6",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.11"
+    "webpack-dev-server": "3.10.3"
   },
   "dependencies": {
     "@material-ui/core": "^3.0.2",
     "@material-ui/icons": "^3.0.1",
+    "emoji-mart": "^2.11.2",
     "express": "^4.16.3",
     "express-ws": "^4.0.0",
     "react": "^16.5.0",

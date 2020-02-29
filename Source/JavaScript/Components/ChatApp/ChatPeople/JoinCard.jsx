@@ -20,7 +20,11 @@ export default class JoinCard extends Component {
     });
   }
 
-  copyToClipboard() {
+  copyToClipboard(link = false) {
+    if(link) {
+      window.navigator.clipboard.writeText(`${window.location.host}/#join=${this.props.joinCode}`);
+      return;
+    }
     window.navigator.clipboard.writeText(this.props.joinCode);
   }
 
@@ -95,6 +99,9 @@ export default class JoinCard extends Component {
                     <Tooltip title="Click to copy">
                       <span className="my-code" onClick={() => this.copyToClipboard()}>{this.props.joinCode}</span>
                     </Tooltip>
+                    <section className="share-link" onClick={() => this.copyToClipboard(true)}>
+                      Click to get a shareable link.
+                    </section>
                   </div>
                 </React.Fragment>
               )}
