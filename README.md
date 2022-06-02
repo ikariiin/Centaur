@@ -1,7 +1,7 @@
 ### Centaur
 
-It would be a simple chatting app for the web for personal threads between people. The only way
-to start chatting with somebody would be to share a unique link with them which would connect you
+It is a simple chatting app for the web for personal threads between people. The only way
+to start chatting with somebody is to share a unique link with them which would connect you
 with them instantly!
 
 Cool, right?
